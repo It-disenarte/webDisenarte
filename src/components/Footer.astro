@@ -1,0 +1,194 @@
+---
+/**
+ * src/components/Footer.astro
+ * Footer actualizado con colores corporativos: Morado (#7C07A6) y Gris (#E6E7E8).
+ * Ajustes: Logo blanco más grande y centrado, iconos de redes sociales ampliados.
+ */
+---
+
+<footer class="bg-[#7C07A6] text-white py-16 border-t border-white/10" role="contentinfo">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-stretch">
+      
+      <div class="flex items-center justify-center md:justify-start h-full">
+        <a href="/" class="hover:opacity-80 transition-opacity" title="Volver al inicio">
+          <img 
+            src="src/assets/LOGO-BLANCO.webp" 
+            alt="Logotipo oficial" 
+            class="h-24 md:h-32 w-auto object-contain" 
+            loading="lazy"
+          />
+        </a>
+      </div>
+
+      <div class="footer-column-border">
+        <div class="flex flex-col space-y-4">
+          <h3 class="footer-title">PUBLICIDAD</h3>
+          
+          <div class="contact-item">
+            <img src="src/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="tel:4272110528" class="contact-link">427 211 05 28</a>
+          </div>
+          
+          <div class="contact-item">
+            <img src="src/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="tel:4271004183" class="contact-link">427 100 41 83</a>
+          </div>
+          
+          <div class="contact-item">
+            <img src="src/assets/ICON-CORREO.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="mailto:ventas@disenartemx.com" class="contact-link">ventas@disenartemx.com</a>
+          </div>
+
+          <div class="flex items-start space-x-3 mt-4">
+            <img src="src/assets/ICON-UBI.webp" alt="" class="contact-icon mt-1" aria-hidden="true" />
+            <address class="footer-address">
+              Av. Lomas del Pedregoso #371<br />
+              Col. Lomas de San Juan, Sección Campestre.<br />
+              San Juan del Rio, Querétaro.
+            </address>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-column-border">
+        <div class="flex flex-col space-y-4">
+          <div class="mb-2">
+            <span class="block text-lg font-light tracking-widest leading-tight uppercase">Marketing</span>
+            <span class="block text-lg font-bold tracking-widest uppercase leading-tight">Digital</span>
+          </div>
+          
+          <div class="contact-item">
+            <img src="src/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="tel:4273459183" class="contact-link">427 345 91 83</a>
+          </div>
+          
+          <div class="contact-item">
+            <img src="src/assets/ICON-CORREO.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="mailto:marketing@disenarte-mexico.org" class="contact-link">marketing@disenarte-mexico.org</a>
+          </div>
+
+          <div class="flex items-start space-x-3 mt-4">
+            <img src="src/assets/ICON-UBI.webp" alt="" class="contact-icon mt-1" aria-hidden="true" />
+            <address class="footer-address">
+              Av. Mármol #5. Col. El Pedregal,<br />
+              San Juan del Río, Querétaro.
+            </address>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-column-border flex flex-col justify-between">
+        <div class="flex flex-col items-start space-y-6 w-full">
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E6E7E8]">Síguenos</span>
+          
+          <div class="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 items-start">
+            <a href="https://www.instagram.com/disenarte.mexico/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="social-btn" 
+               aria-label="Instagram">
+              <img src="src/assets/INSTA.webp" alt="Instagram" class="w-10 h-10 md:w-12 md:h-12" />
+            </a>
+            <a href="https://www.facebook.com/Disenarte2mil" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="social-btn" 
+               aria-label="Facebook">
+              <img src="src/assets/FACEBOOK.webp" alt="Facebook" class="w-10 h-10 md:w-12 md:h-12" />
+            </a>
+          </div>
+        </div>
+        
+        <p class="text-[10px] text-[#E6E7E8]/50 uppercase tracking-widest mt-12 pt-8">
+          © 2026 Diseñarte México
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  @reference "tailwindcss";
+
+  :root {
+    --brand-purple: #7C07A6;
+    --brand-gray: #E6E7E8;
+  }
+
+  .footer-column-border {
+    /* Borde en gris corporativo #E6E7E8 */
+    border-left-width: 0;
+    padding-left: 0;
+  }
+
+  @media (min-width: 768px) {
+    .footer-column-border {
+      border-left-width: 1px;
+      border-color: rgba(230, 231, 232, 0.2);
+      padding-left: 2.5rem;
+    }
+  }
+
+  .footer-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-address {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    font-weight: 300;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .contact-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .contact-link {
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    color: var(--brand-gray);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .social-btn {
+    transition: all 0.3s;
+  }
+
+  .social-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+
+  @media (max-width: 768px) {
+    footer { text-align: center; }
+    .footer-column-border {
+      border-top: 1px solid rgba(230, 231, 232, 0.1);
+      padding-top: 2rem;
+      align-items: center;
+    }
+    .contact-item, .flex-col, .items-start { 
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-address { text-align: center; }
+  }
+</style>

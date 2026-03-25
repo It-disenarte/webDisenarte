@@ -1,0 +1,151 @@
+---
+/**
+ * DISEÑARTE MÉXICO - PÁGINA DE CONTACTO 
+ * Fix: Se elimina overflow-hidden del article para que el globo no se corte.
+ */
+import Layout from "../layouts/Layout.astro";
+
+const seoTitle = "Agenda una sesión | Contacto | Diseñarte México";
+const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus proyectos de publicidad y marketing digital.";
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <main class="bg-[#f4f4f4] min-h-screen pt-16 md:pt-24 lg:pt-32 pb-16 selection:bg-[#712c91] selection:text-white font-avenir-book overflow-x-hidden relative">
+    
+    <div class="max-w-[1550px] mx-auto px-4 md:px-8 lg:px-12">
+      
+      <header class="mb-10 md:mb-16 flex flex-col items-start max-w-5xl">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-avenir-book tracking-tighter uppercase leading-[1.1] mb-6 text-[#1a1a1a]">
+          ¡<span class="font-avenir-black text-[#712c91]">Agenda una sesión</span> con uno de nuestros agentes de ventas <span class="font-avenir-black text-[#712c91]">para revisar tu proyecto!</span>
+        </h1>
+        <div class="h-1.5 w-24 bg-[#712c91] opacity-70 rounded-full"></div>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
+        
+        {/* --- FORMULARIO --- */}
+        <section class="lg:col-span-5 bg-[#e2e4e6] p-7 md:p-10 lg:p-12 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-gray-200 relative z-20">
+          <h2 class="sr-only">Formulario de contacto</h2>
+          
+          <form id="contact-form" class="space-y-6">
+            <div class="space-y-2">
+              <label for="nombre" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Nombre completo*</label>
+              <input type="text" id="nombre" name="nombre" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="telefono" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Teléfono*</label>
+              <input type="tel" id="telefono" name="telefono" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="correo" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Correo Electrónico*</label>
+              <input type="email" id="correo" name="correo" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="mensaje" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-5 py-4 rounded-[2rem] bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 resize-none shadow-sm"></textarea>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit" id="submit-btn" class="w-full bg-[#712c91] text-white font-avenir-black uppercase py-5 rounded-xl shadow-lg hover:bg-[#5a2375] transition-all duration-300 text-xl flex items-center justify-center space-x-3 active:scale-95 tracking-widest cursor-pointer">
+                <span>ENVIAR SOLICITUD</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        {/* --- TARJETAS DE UBICACIÓN --- */}
+        <aside class="lg:col-span-7 space-y-24 lg:space-y-12 relative z-10 lg:pl-20">
+          
+          {/* BLOQUE 1: PUBLICIDAD */}
+          <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
+            <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.1200374464333!2d-99.96055592401298!3d20.377940009812104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b754c677837%3A0x2fb521035292e04b!2s%E2%9C%85DISE%C3%91ARTE%20M%C3%89XICO%20%7C%20Agencia%20de%20publicidad%20y%20marketing%20digital!5e0!3m2!1ses-419!2smx!4v1774407681102!5m2!1ses-419!2smx" 
+                    title="Ubicación Publicidad" 
+                    class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="contact-info-block">
+              <h3 class="text-xl md:text-2xl font-avenir-black uppercase mb-4 text-white">Publicidad</h3>
+              <ul class="space-y-2 text-[11px] md:text-xs font-avenir-book mb-4 text-white/90">
+                <li>📞 427 211 05 28</li>
+                <li>✉️ ventas@rotulosdisenarte.com</li>
+              </ul>
+              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-[11px] text-white/80 leading-snug">Av. Lomas del pedregoso #371. Col. Lomas de San Juan.</p>
+            </div>
+          </article>
+
+          {/* BLOQUE 2: MARKETING DIGITAL */}
+          <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
+            <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.16258823519!2d-99.97431532401295!3d20.37618510987055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b0032338d65%3A0x3fa053fb4d29d151!2z4pyFRElTRcORQVJURSBNw4lYSUNPIHwgQWdlbmNpYSBkZSBtYXJrZXRpbmc!5e0!3m2!1ses-419!2smx!4v1774407817165!5m2!1ses-419!2smx" 
+                    title="Ubicación Marketing Digital" 
+                    class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="contact-info-block">
+              <h3 class="text-xl md:text-2xl font-avenir-black uppercase mb-4 text-white">Marketing Digital</h3>
+              <ul class="space-y-2 text-[11px] md:text-xs font-avenir-book mb-4 text-white/90">
+                <li>💬 427 345 91 83</li>
+                <li>✉️ marketing@disenarte-mexico.org</li>
+              </ul>
+              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-[11px] text-white/80 leading-snug">Av. Mármol #5. Col. El Pedregal.</p>
+            </div>
+          </article>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  @font-face {
+    font-family: 'Avenir Book';
+    src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir Black';
+    src: url('/fonts/avenir-lt-std-65-medium.otf') format('opentype');
+    font-weight: 900; font-style: normal; font-display: swap;
+  }
+
+  body { font-family: 'Avenir Book', sans-serif; overflow-x: hidden; }
+  .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
+  .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+  }
+
+  .contact-info-block {
+    width: 100%; padding: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; background-color: rgba(113, 44, 145, 0.98);
+    position: relative; z-index: 30;
+  }
+
+  @media (min-width: 768px) {
+    .contact-info-block {
+      position: absolute; top: 50%; 
+      left: 0; transform: translate(-5rem, -50%); 
+      border-radius: 9999px;
+      width: 320px; height: 320px;
+      padding: 2.5rem; background-color: rgba(113, 44, 145, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: -10px 10px 30px rgba(0,0,0,0.15);
+    }
+  }
+</style>

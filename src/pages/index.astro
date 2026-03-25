@@ -1,0 +1,257 @@
+---
+/**
+ * PÁGINA PRINCIPAL - Diseñarte México
+ * Integración de desvanecimientos y persistencia de lava
+ */
+import Layout from '../layouts/Layout.astro';
+
+const seoTitle = "Diseñarte México | Comunicación Visual y Marketing Digital";
+const seoDescription = "Diseño y estrategia al servicio de tu marca. Más de 20 años de experiencia impulsando el sector industrial con soluciones de marketing.";
+
+const images = [
+  "src/assets/A.webp", "src/assets/B.webp", "src/assets/C.webp", "src/assets/D.webp", 
+  "src/assets/E.webp", "src/assets/F.webp", "src/assets/G.webp", "src/assets/H.webp", 
+  "src/assets/I.webp", "src/assets/J.webp", "src/assets/K.webp"
+];
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  
+  <main class="relative bg-white overflow-x-hidden">
+
+    <section class="relative min-h-[90vh] flex items-center justify-center px-4 py-12 md:py-20 overflow-hidden">
+      
+      <div class="lava-wrapper pointer-events-none" transition:persist="lava-bg">
+        <div id="lava-container" class="gooey-container opacity-50"></div>
+      </div>
+
+      <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-white via-white/90 to-transparent z-[1] pointer-events-none"></div>
+
+      <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        
+        <div class="flex flex-col items-center lg:items-start">
+          <div class="canvas-container reveal">
+            <div class="canvas">
+                <div class="line">
+                  <span class="quote">“</span>
+                  <h1 class="font-walkway thin"><span class="capitalize">D</span>iseño &</h1>
+                </div>
+                <div class="line">
+                  <span class="font-eastman bold">estrategia</span>
+                </div>
+                <div class="line indent">
+                  <span class="font-walkway thin">al servicio</span>
+                </div>
+                <div class="line last-row">
+                  <span class="font-eastman bold">de tu marca</span>
+                  <span class="quote">”</span>
+                </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 lg:ml-10 flex flex-col items-center lg:items-start space-y-8 text-center lg:text-left font-avenir reveal delay-1">
+            <p class="text-gray-700 text-lg md:text-xl max-w-md leading-tight">
+              En <strong class="font-medium text-[#1a1a1a]">Diseñarte México</strong> impulsamos la comunicación visual del sector industrial con soluciones de marketing, diseño y publicidad, respaldadas por más de <span class="font-medium text-[#1a1a1a]">20 años de experiencia.</span>
+            </p>
+            <a href="/contacto" class="inline-block bg-[#7C07A6] hover:opacity-90 text-white px-16 py-4 rounded-full font-medium text-lg transition-all duration-300 shadow-lg transform hover:-translate-y-1 uppercase tracking-widest">
+              Contáctanos
+            </a>
+          </div>
+        </div>
+
+        <div class="w-full relative lg:mt-0 mt-8 reveal delay-2">
+          <div class="relative aspect-video bg-[#E6E7E8] rounded-2xl overflow-hidden shadow-2xl border border-[#E6E7E8]">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/MUztVYnj0-Y" 
+              title="Presentación corporativa Diseñarte México" 
+              class="w-full h-full" 
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20 md:py-32 px-4 relative z-20">
+      <div class="max-w-7xl mx-auto font-avenir">
+        
+        <header class="text-center mb-20 reveal">
+          <h2 class="text-3xl md:text-5xl tracking-tight text-[#1a1a1a] font-book">
+            “<span class="text-[#7C07A6] font-medium">Publicidad</span> que conecta, <span class="text-[#7C07A6] font-medium">marketing</span> que convierte”
+          </h2>
+          <div class="h-1 w-24 bg-[#7C07A6] mx-auto mt-6"></div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
+          <article class="flex flex-col items-center text-center space-y-8 h-full group reveal delay-1">
+            <div class="w-full aspect-video flex items-center justify-center overflow-hidden">
+              <img src="src/assets/PUBLICIDAD.webp" alt="Servicios de publicidad industrial" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <p class="text-xl md:text-2xl font-book leading-tight max-w-md flex-grow text-gray-800">
+              Diseñamos soluciones publicitarias integrales que <strong class="font-medium">optimizan la comunicación</strong> de tu marca y potencian su posicionamiento en el mercado.
+            </p>
+            <a href="/publicidad" class="btn-plus">
+              <div class="plus-box">+</div><span class="btn-text">conoce más</span>
+            </a>
+          </article>
+
+          <article class="flex flex-col items-center text-center space-y-8 h-full group reveal delay-2">
+            <div class="w-full aspect-video flex items-center justify-center overflow-hidden">
+              <img src="src/assets/MKT.webp" alt="Estrategias de marketing digital" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <p class="text-xl md:text-2xl font-book leading-tight max-w-md flex-grow text-gray-800">
+              Desarrollamos estrategias de marketing digital orientadas a <strong class="font-medium">fortalecer la presencia</strong> de tu marca y generar resultados medibles.
+            </p>
+            <a href="/marketing" class="btn-plus">
+              <div class="plus-box">+</div><span class="btn-text">conoce más</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white pb-32 overflow-hidden relative z-20 reveal">
+      <div class="relative flex border-y border-[#E6E7E8] py-12 bg-[#E6E7E8]/30">
+        <div class="flex animate-marquee whitespace-nowrap items-center">
+          {[...images, ...images].map((src) => (
+            <div class="mx-12 w-32 md:w-48 flex-shrink-0 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              <img src={src} alt="Cliente aliado" loading="lazy" class="max-w-full h-auto" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto text-center px-4 mt-20 font-avenir reveal delay-1">
+        <h3 class="text-2xl md:text-4xl tracking-tight text-[#1a1a1a] font-book">
+          “Conviértete en una de las empresas que han <span class="text-[#7C07A6] font-medium">maximizado su impacto y crecimiento</span>”
+        </h3>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style is:global>
+  /** 1. FUENTES **/
+  @font-face {
+    font-family: 'Eastman Grotesque Black';
+    src: url('/fonts/Eastman-Grotesque-Black-trial.otf') format('opentype');
+    font-weight: 900; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Walkway UltraBold';
+    src: url('/fonts/Walkway_UltraBold.ttf') format('truetype');
+    font-weight: 800; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir LT Std';
+    src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
+    font-weight: 400; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir LT Std';
+    src: url('/fonts/avenir-lt-std-65-medium.otf') format('opentype');
+    font-weight: 500; font-display: swap;
+  }
+
+  /** 2. VARIABLES Y BASE **/
+  :root { 
+    --purple-main: #7C07A6; 
+    --gray-main: #E6E7E8;
+    --zoom: 5.5rem; 
+    --font-eastman: 'Eastman Grotesque Black', sans-serif;
+    --font-walkway: 'Walkway UltraBold', sans-serif;
+    --font-avenir: 'Avenir LT Std', sans-serif;
+  }
+
+  body { background-color: white; color: #1a1a1a; margin: 0; }
+  .font-eastman { font-family: var(--font-eastman); }
+  .font-walkway { font-family: var(--font-walkway); }
+  .font-avenir { font-family: var(--font-avenir); }
+  .font-book { font-weight: 400; }
+  .font-medium { font-weight: 500; }
+
+  /* Nota: whatsapp-container eliminado de aquí por redundancia */
+
+  .lava-wrapper { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .gooey-container { width: 100%; height: 100%; background: white; filter: contrast(20) brightness(1.1); transform: translateZ(0); }
+  .grumo { position: absolute; filter: blur(25px); border-radius: 50%; will-change: left, top; mix-blend-mode: multiply; }
+
+  .canvas { font-size: var(--zoom); transform: rotate(-2deg); line-height: 0.82; padding: 20px; }
+  .line { display: flex; align-items: center; white-space: nowrap; }
+  .quote { font-family: var(--font-eastman); color: var(--purple-main); font-size: 1.1em; font-weight: 900; }
+  .thin { font-size: 0.65em; letter-spacing: -0.02em; text-transform: lowercase; color: #1a1a1a; }
+  .bold { font-size: 1.25em; text-transform: lowercase; letter-spacing: -0.05em; }
+  .indent { margin-left: 1.6em; }
+  .capitalize { text-transform: uppercase; }
+
+  .btn-plus { 
+    display: flex; align-items: center; background-color: var(--gray-main); 
+    border-radius: 9999px; overflow: hidden; transition: 0.3s ease; 
+  }
+  .btn-plus:hover { background-color: #d1d5db; }
+  .plus-box { 
+    background-color: var(--purple-main); color: white; 
+    width: 50px; height: 50px; display: flex; 
+    justify-content: center; align-items: center; 
+    font-weight: 900; font-size: 1.5rem; 
+  }
+  .btn-text { 
+    padding: 0 35px; color: #374151; font-weight: 500; 
+    text-transform: uppercase; font-size: 0.75rem; tracking: 0.1em; 
+  }
+
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .animate-marquee { animation: marquee 50s linear infinite; }
+
+  @media (max-width: 768px) { 
+    :root { --zoom: 3.2rem; } 
+    .indent { margin-left: 1rem; } 
+    .btn-plus { transform: scale(0.9); }
+  }
+</style>
+
+<script>
+  /**
+   * LÓGICA DE ANIMACIÓN LAVA COMPATIBLE CON VIEW TRANSITIONS
+   */
+  const colors = ['#7C07A6', '#A607D9', '#530470', '#E6E7E8', '#C0C1C2'];
+  
+  function initLava() {
+    const container = document.getElementById('lava-container');
+    if (!container || container.children.length > 0) return;
+
+    const isMobile = window.innerWidth < 768;
+    const numGrumos = isMobile ? 8 : 22; 
+    const random = (min: number, max: number): number => Math.random() * (max - min) + min;
+
+    for (let i = 0; i < numGrumos; i++) {
+      const grumo = document.createElement('div');
+      grumo.classList.add('grumo');
+      const size = isMobile ? random(200, 400) : random(300, 650); 
+      grumo.style.width = grumo.style.height = `${size}px`;
+      grumo.style.background = colors[Math.floor(Math.random() * colors.length)];
+      grumo.style.left = `${random(-20, 110)}%`;
+      grumo.style.top = `${random(-20, 110)}%`;
+      container.appendChild(grumo);
+      
+      const animar = (el: HTMLElement) => {
+        const tx = random(-20, 110);
+        const ty = random(-20, 110);
+        const dur = isMobile ? random(12, 22) : random(8, 16);
+
+        el.animate([
+          { left: el.style.left, top: el.style.top },
+          { left: `${tx}%`, top: `${ty}%` }
+        ], { duration: dur * 1000, easing: 'ease-in-out' }).onfinish = () => {
+          el.style.left = `${tx}%`;
+          el.style.top = `${ty}%`;
+          animar(el);
+        };
+      };
+      animar(grumo);
+    }
+  }
+
+  document.addEventListener('astro:page-load', initLava);
+</script>

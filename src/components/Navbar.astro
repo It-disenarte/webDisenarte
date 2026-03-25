@@ -1,0 +1,132 @@
+---
+/**
+ * src/components/Navbar.astro
+ */
+---
+
+<nav 
+  id="main-nav" 
+  class="fixed top-0 left-0 w-full z-[100000] bg-white/95 backdrop-blur-md border-b border-[#E6E7E8] h-20 shadow-sm transition-all duration-300"
+>
+  <div class="container mx-auto h-full px-6 flex justify-between items-center">
+    
+    <a href="/" class="flex items-center z-[110000] transition-transform hover:scale-105 active:scale-95">
+      <img 
+        id="nav-logo"
+        src="/images/LOGO.webp" 
+        alt="Logotipo" 
+        class="h-14 md:h-16 w-auto object-contain transition-all duration-300"
+      />
+    </a>
+
+    <div class="hidden lg:flex items-center space-x-8">
+      <a href="/nosotros" class="nav-link">Nosotros</a>
+      <a href="/publicidad" class="nav-link">Publicidad</a>
+      <a href="/marketing" class="nav-link">Marketing Digital</a>
+      <a href="/contacto" class="nav-link">Contacto</a>
+      <a href="/blog" class="nav-link">Blog</a>
+    </div>
+
+    <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none z-[110000]">
+      <span class="w-6 h-0.5 bg-gray-800 transition-all duration-300 line-1"></span>
+      <span class="w-6 h-0.5 bg-gray-800 transition-all duration-300 line-2"></span>
+      <span class="w-6 h-0.5 bg-gray-800 transition-all duration-300 line-3"></span>
+    </button>
+  </div>
+
+  <div 
+    id="mobile-menu" 
+    class="fixed top-0 right-0 h-screen w-full bg-white flex flex-col items-center justify-center space-y-8 text-2xl transform translate-x-full transition-transform duration-500 ease-in-out lg:hidden z-[105000]"
+  >
+    <a href="/nosotros" class="mobile-link">Nosotros</a>
+    <a href="/publicidad" class="mobile-link">Publicidad</a>
+    <a href="/marketing" class="mobile-link">Marketing Digital</a>
+    <a href="/contacto" class="mobile-link">Contacto</a>
+    <a href="/blog" class="mobile-link">Blog</a>
+  </div>
+</nav>
+
+<style>
+    @font-face {
+      font-family: 'Avenir LT Std 65 Medium';
+      src: url('/fonts/avenir-lt-std-65-medium.otf') format('opentype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+
+    :root {
+        --brand-purple: #7C07A6;
+        --brand-gray: #E6E7E8;
+        --font-avenir: 'Avenir LT Std 65 Medium', sans-serif;
+    }
+
+    .nav-link {
+        position: relative;
+        color: #374151;
+        font-family: var(--font-avenir);
+        font-weight: 500;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.3s;
+        padding: 0.5rem 0;
+    }
+
+    .nav-link:hover { color: var(--brand-purple); }
+    .nav-link::after {
+        content: ''; position: absolute; left: 0; bottom: 0;
+        width: 0; height: 2px; background-color: var(--brand-purple);
+        transition: width 0.3s;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .mobile-link {
+        font-family: var(--font-avenir);
+        color: #1f2937;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .open-menu .line-1 { transform: rotate(45deg) translate(5px, 6px); background-color: var(--brand-purple); }
+    .open-menu .line-2 { opacity: 0; }
+    .open-menu .line-3 { transform: rotate(-45deg) translate(5px, -6px); background-color: var(--brand-purple); }
+
+    .nav-scrolled {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        height: 4.5rem;
+    }
+</style>
+
+<script is:inline>
+  function initNavbar() {
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const body = document.body;
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (!btn || !menu) return;
+
+    const toggleMenu = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.classList.toggle('translate-x-full');
+      btn.classList.toggle('open-menu');
+      body.classList.toggle('overflow-hidden');
+    };
+
+    btn.replaceWith(btn.cloneNode(true));
+    const newBtn = document.getElementById('menu-btn');
+    newBtn.addEventListener('click', toggleMenu);
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('translate-x-full');
+        newBtn.classList.remove('open-menu');
+        body.classList.remove('overflow-hidden');
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initNavbar);
+  initNavbar();
+</script>

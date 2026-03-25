@@ -1,0 +1,97 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloater from '../components/WhatsAppFloater.astro';
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={description} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+        <ClientRouter />
+    </head>
+    <body class="bg-white text-gray-900">
+        
+        <Navbar />
+
+        <div id="global-loader" class="hidden fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-start overflow-hidden pointer-events-none">
+            <div class="mt-24 mb-10 opacity-20">
+                <img src="/images/LOGO.webp" alt="Cargando..." class="w-16 h-16 object-contain animate-pulse" />
+            </div>
+            
+            <div class="max-w-7xl w-full px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                {[1, 2, 3].map(() => (
+                    <div class="animate-pulse flex flex-col">
+                        <div class="bg-gray-100 aspect-[4/3] rounded-[2.5rem] mb-8"></div>
+                        <div class="h-3 bg-gray-100 rounded w-1/4 mb-6"></div>
+                        <div class="h-8 bg-gray-100 rounded w-full mb-4"></div>
+                        <div class="h-8 bg-gray-100 rounded w-2/3 mb-8"></div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <main class="pt-20 min-h-screen">
+            <slot /> 
+        </main>
+
+        <Footer />
+        
+        <div class="whatsapp-wrapper">
+            <WhatsAppFloater />
+        </div>
+
+        <script is:inline>
+            document.addEventListener('astro:before-preparation', (event) => {
+                const loader = document.getElementById('global-loader');
+                // Solo activamos clics bloqueantes si vamos al blog
+                if (loader && event.to.pathname.includes('/blog')) {
+                    loader.classList.remove('hidden');
+                    loader.style.pointerEvents = 'auto'; 
+                }
+            });
+
+            document.addEventListener('astro:page-load', () => {
+                const loader = document.getElementById('global-loader');
+                if (loader) {
+                    loader.classList.add('hidden');
+                    loader.style.pointerEvents = 'none'; // Importante para liberar el Navbar
+                }
+            });
+        </script>
+
+        <style is:global>
+            @keyframes revealUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .reveal { animation: revealUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+            .delay-1 { animation-delay: 0.2s; opacity: 0; }
+            .delay-2 { animation-delay: 0.4s; opacity: 0; }
+            .delay-3 { animation-delay: 0.6s; opacity: 0; }
+
+            .whatsapp-wrapper {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                z-index: 99999;
+                pointer-events: none;
+            }
+            .whatsapp-wrapper > * { pointer-events: auto; }
+            html { scroll-behavior: smooth; }
+        </style>
+    </body>
+</html>
