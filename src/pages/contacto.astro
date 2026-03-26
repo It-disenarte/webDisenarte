@@ -1,12 +1,15 @@
 ---
 /**
  * DISEÑARTE MÉXICO - PÁGINA DE CONTACTO 
- * Fix: Se elimina overflow-hidden del article para que el globo no se corte.
+ * Fix: Envío de formulario vía AJAX hacia cPanel (PHP)
  */
 import Layout from "../layouts/Layout.astro";
 
 const seoTitle = "Agenda una sesión | Contacto | Diseñarte México";
 const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus proyectos de publicidad y marketing digital.";
+
+// URL de tu archivo en el cPanel
+const PHP_ACTION_URL = "https://disenartemx.com/enviar.php";
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
@@ -44,13 +47,18 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
             </div>
 
             <div class="space-y-2">
-              <label for="mensaje" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-5 py-4 rounded-[2rem] bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 resize-none shadow-sm"></textarea>
+                <label for="empresa" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Empresa (Opcional)</label>
+                <input type="text" id="empresa" name="empresa" class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="mensaje" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Mensaje*</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required class="w-full px-5 py-4 rounded-[2rem] bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 resize-none shadow-sm"></textarea>
             </div>
 
             <div class="pt-4">
               <button type="submit" id="submit-btn" class="w-full bg-[#712c91] text-white font-avenir-black uppercase py-5 rounded-xl shadow-lg hover:bg-[#5a2375] transition-all duration-300 text-xl flex items-center justify-center space-x-3 active:scale-95 tracking-widest cursor-pointer">
-                <span>ENVIAR SOLICITUD</span>
+                <span id="btn-text">ENVIAR SOLICITUD</span>
               </button>
             </div>
           </form>
@@ -59,11 +67,10 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
         {/* --- TARJETAS DE UBICACIÓN --- */}
         <aside class="lg:col-span-7 space-y-24 lg:space-y-12 relative z-10 lg:pl-20">
           
-          {/* BLOQUE 1: PUBLICIDAD */}
           <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
             <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.1200374464333!2d-99.96055592401298!3d20.377940009812104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b754c677837%3A0x2fb521035292e04b!2s%E2%9C%85DISE%C3%91ARTE%20M%C3%89XICO%20%7C%20Agencia%20de%20publicidad%20y%20marketing%20digital!5e0!3m2!1ses-419!2smx!4v1774407681102!5m2!1ses-419!2smx" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3743.834066914619!2d-99.9818815!3d20.3175404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b968a30147d%3A0xe7a505b229792686!2sDise%C3%B1arte%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1711410000000!5m2!1ses-419!2smx" 
                     title="Ubicación Publicidad" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
@@ -80,16 +87,14 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
             </div>
           </article>
 
-          {/* BLOQUE 2: MARKETING DIGITAL */}
           <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
             <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.16258823519!2d-99.97431532401295!3d20.37618510987055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b0032338d65%3A0x3fa053fb4d29d151!2z4pyFRElTRcORQVJURSBNw4lYSUNPIHwgQWdlbmNpYSBkZSBtYXJrZXRpbmc!5e0!3m2!1ses-419!2smx!4v1774407817165!5m2!1ses-419!2smx" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3743.5135248234855!2d-99.9961234!3d20.3308215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b83e35d1b7d%3A0x8f8c471249b5c2a!2sDise%C3%B1arte%20M%C3%A9xico%20Mkt!5e0!3m2!1ses-419!2smx!4v1711410000000!5m2!1ses-419!2smx" 
                     title="Ubicación Marketing Digital" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
+                    loading="lazy">
                 </iframe>
             </div>
             <div class="contact-info-block">
@@ -108,6 +113,47 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
     </div>
   </main>
 </Layout>
+
+<script is:inline define:vars={{ PHP_ACTION_URL }}>
+  const form = document.getElementById('contact-form');
+  const btn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // UI Loading state
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+    btnText.innerText = "ENVIANDO SOLICITUD...";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(PHP_ACTION_URL, {
+        method: 'POST',
+        body: formData,
+        // Importante: No incluir headers de Content-Type con FormData, el navegador lo hace solo.
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        alert("¡Mensaje enviado! " + result.message);
+        form.reset();
+      } else {
+        alert("Opps: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error de conexión con el servidor. Inténtalo de nuevo o contáctanos por WhatsApp.");
+    } finally {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btnText.innerText = "ENVIAR SOLICITUD";
+    }
+  });
+</script>
 
 <style is:global>
   @font-face {
