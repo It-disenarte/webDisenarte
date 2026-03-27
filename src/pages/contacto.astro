@@ -2,7 +2,6 @@
 /**
  * PÁGINA: CONTACTO - Diseñarte México
  * Arquitectura: Astro (Vercel) + Backend PHP (cPanel Subdomain)
- * Solución: Comunicación Cross-Origin (CORS) mediante URL absoluta al subdominio del panel.
  */
 import Layout from "../layouts/Layout.astro";
 
@@ -35,7 +34,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
 
             <div class="space-y-2">
               <label for="telefono" class="form-label">Teléfono*</label>
-              <input type="tel" id="telefono" name="telefono" required class="form-input" placeholder="000 000 0000" />
+              <input type="tel" id="telefono" name="telefono" required class="form-input" placeholder="427 000 0000" />
             </div>
 
             <div class="space-y-2">
@@ -66,8 +65,8 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.056247494101!2d-99.9880196!3d20.3909786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b65646f906d%3A0xc3f83790f5b10d0d!2sDise%C3%B1arte%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1711488000000!5m2!1ses-419!2smx" 
-                    title="Ubicación Diseñarte México Publicidad" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.0560756353955!2d-99.9818815!3d20.3392576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b754c677737%3A0x2fb521035292e04b!2zRGlzZcOxYXJ0ZSBNw6l4aWNv!5e0!3m2!1ses-419!2smx!4v1711495000000!5m2!1ses-419!2smx" 
+                    title="Diseñarte México - Publicidad" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
                     loading="lazy">
@@ -88,8 +87,8 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.13254!2d-99.9954!3d20.3885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIzJzE4LjYiTiA5OcKwNTknNDMuNCJX!5e0!3m2!1ses-419!2smx!4v1711488000000!5m2!1ses-419!2smx" 
-                    title="Ubicación Diseñarte México Marketing" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.16258823519!2d-99.97431532401289!3d20.37618510987055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b0032338d65%3A0x3fa053fb4d29d151!2z4pyFRElTRcORQVJURSBNw4lYSUNPIHwgQWdlbmNpYSBkZSBtYXJrZXRpbmc!5e0!3m2!1ses-419!2smx!4v1774583262060!5m2!1ses-419!2smx" 
+                    title="Diseñarte México - Marketing Digital" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
                     loading="lazy">
@@ -115,10 +114,6 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
 </Layout>
 
 <script is:inline>
-  /**
-   * IMPORTANTE: Apuntamos al subdominio donde reside el motor PHP (cPanel).
-   * Vercel no procesa archivos .php, por lo que usamos la URL absoluta del panel.
-   */
   const PHP_ACTION_URL = "https://panel.disenartemx.com/procesar.php";
 
   const form = document.getElementById('contact-form');
@@ -127,10 +122,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    // Feedback visual de carga
     btn.disabled = true;
-    btn.style.opacity = "0.7";
     btnText.innerText = "ENVIANDO SOLICITUD...";
 
     const formData = new FormData(form);
@@ -138,29 +130,20 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
     try {
       const response = await fetch(PHP_ACTION_URL, {
         method: 'POST',
-        mode: 'cors', // Habilita la petición hacia el subdominio
+        mode: 'cors',
         body: formData,
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const result = await response.json();
-
       if (result.status === 'success') {
-        alert("¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.");
+        alert("¡Mensaje enviado con éxito!");
         form.reset();
       } else {
         alert("Atención: " + result.message);
       }
     } catch (error) {
-      console.error("Error técnico en el envío:", error);
-      alert("Hubo un error de conexión con el servidor. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
+      alert("Error de conexión con el servidor.");
     } finally {
-      // Restaurar estado del botón
       btn.disabled = false;
-      btn.style.opacity = "1";
       btnText.innerText = "ENVIAR SOLICITUD";
     }
   });
@@ -186,7 +169,6 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
   .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
   .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
   .text-purple-accent { color: #712c91; }
-  .bg-purple-accent { background-color: #712c91; }
 
   .form-label {
       display: block;
@@ -206,10 +188,6 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       outline: none;
   }
 
-  .form-input:focus {
-      box-shadow: 0 0 0 2px #66bcc9;
-  }
-
   .btn-submit {
       width: 100%;
       color: #ffffff;
@@ -217,19 +195,10 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       text-transform: uppercase;
       padding: 1.25rem;
       border-radius: 0.75rem;
-      font-size: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background-color: #712c91;
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
-  }
-
-  .btn-submit:hover:not(:disabled) {
-      background-color: #5a2374;
-      transform: translateY(-2px);
   }
 
   .location-card {
@@ -239,27 +208,22 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       background-color: #ffffff;
       border-radius: 2rem;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+      overflow: visible; 
   }
 
   @media (min-width: 768px) {
-      .location-card {
-          display: block;
-          height: 450px;
-          border-radius: 3rem;
-      }
+      .location-card { height: 450px; border-radius: 3rem; }
   }
 
   .map-container {
       width: 100%;
       height: 250px;
-      overflow: hidden;
+      overflow: hidden; 
+      border-radius: 2rem;
   }
 
   @media (min-width: 768px) {
-      .map-container {
-          height: 100%;
-      }
+      .map-container { height: 100%; border-radius: 3rem; }
   }
 
   .contact-info-block {
@@ -281,7 +245,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       top: 50%; 
       left: 0; 
       transform: translate(-5rem, -50%); 
-      border-radius: 9999px;
+      border-radius: 50%; 
       width: 320px; 
       height: 320px;
       background-color: rgba(113, 44, 145, 0.95);
