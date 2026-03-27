@@ -1,8 +1,8 @@
 ---
 /**
  * PÁGINA: CONTACTO - Diseñarte México
- * Arquitectura: Astro + Tailwind CSS
- * Solución: Detección dinámica de origen para evitar errores de CORS.
+ * Arquitectura: Astro (Vercel) + Backend PHP (cPanel Subdomain)
+ * Solución: Comunicación Cross-Origin (CORS) mediante URL absoluta al subdominio del panel.
  */
 import Layout from "../layouts/Layout.astro";
 
@@ -35,7 +35,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
 
             <div class="space-y-2">
               <label for="telefono" class="form-label">Teléfono*</label>
-              <input type="tel" id="telefono" name="telefono" required class="form-input" placeholder="427 000 0000" />
+              <input type="tel" id="telefono" name="telefono" required class="form-input" placeholder="000 000 0000" />
             </div>
 
             <div class="space-y-2">
@@ -66,7 +66,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.010101010101!2d-99.99!3d20.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIyJzQ4LjAiTiA5OcKwNTknMjQuMCJX!5e0!3m2!1ses-419!2smx!4v1700000000000" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.056247494101!2d-99.9880196!3d20.3909786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b65646f906d%3A0xc3f83790f5b10d0d!2sDise%C3%B1arte%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1711488000000!5m2!1ses-419!2smx" 
                     title="Ubicación Diseñarte México Publicidad" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
@@ -88,7 +88,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.010101010101!2d-99.98!3d20.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIyJzQ4LjAiTiA5OcKwNTknMjQuMCJX!5e0!3m2!1ses-419!2smx!4v1700000000000" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.13254!2d-99.9954!3d20.3885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIzJzE4LjYiTiA5OcKwNTknNDMuNCJX!5e0!3m2!1ses-419!2smx!4v1711488000000!5m2!1ses-419!2smx" 
                     title="Ubicación Diseñarte México Marketing" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
@@ -115,8 +115,11 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
 </Layout>
 
 <script is:inline>
-  // Detectamos el dominio actual dinámicamente para evitar el error de CORS
-  const PHP_ACTION_URL = `${window.location.origin}/procesar.php`;
+  /**
+   * IMPORTANTE: Apuntamos al subdominio donde reside el motor PHP (cPanel).
+   * Vercel no procesa archivos .php, por lo que usamos la URL absoluta del panel.
+   */
+  const PHP_ACTION_URL = "https://panel.disenartemx.com/procesar.php";
 
   const form = document.getElementById('contact-form');
   const btn = document.getElementById('submit-btn');
@@ -125,7 +128,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Estado de carga
+    // Feedback visual de carga
     btn.disabled = true;
     btn.style.opacity = "0.7";
     btnText.innerText = "ENVIANDO SOLICITUD...";
@@ -135,7 +138,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
     try {
       const response = await fetch(PHP_ACTION_URL, {
         method: 'POST',
-        mode: 'cors', // Asegura el intercambio de recursos entre orígenes si es necesario
+        mode: 'cors', // Habilita la petición hacia el subdominio
         body: formData,
       });
 
@@ -152,10 +155,10 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
         alert("Atención: " + result.message);
       }
     } catch (error) {
-      console.error("Error en el envío:", error);
+      console.error("Error técnico en el envío:", error);
       alert("Hubo un error de conexión con el servidor. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
     } finally {
-      // Restaurar botón
+      // Restaurar estado del botón
       btn.disabled = false;
       btn.style.opacity = "1";
       btnText.innerText = "ENVIAR SOLICITUD";
@@ -236,6 +239,7 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       background-color: #ffffff;
       border-radius: 2rem;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
   }
 
   @media (min-width: 768px) {
@@ -250,13 +254,11 @@ const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus
       width: 100%;
       height: 250px;
       overflow: hidden;
-      border-radius: 2rem;
   }
 
   @media (min-width: 768px) {
       .map-container {
           height: 100%;
-          border-radius: 3rem;
       }
   }
 
