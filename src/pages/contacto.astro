@@ -2,13 +2,12 @@
 /**
  * PÁGINA: CONTACTO - Diseñarte México
  * Arquitectura: Astro + Tailwind CSS
+ * Solución: Detección dinámica de origen para evitar errores de CORS.
  */
 import Layout from "../layouts/Layout.astro";
 
 const seoTitle = "Agenda una sesión | Contacto | Diseñarte México";
 const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus proyectos de publicidad y marketing digital en San Juan del Río.";
-
-const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
@@ -67,7 +66,7 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps?q=Diseñarte+México+Publicidad+Av.+Lomas+del+pedregoso+371+San+Juan+del+Río&output=embed" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.010101010101!2d-99.99!3d20.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIyJzQ4LjAiTiA5OcKwNTknMjQuMCJX!5e0!3m2!1ses-419!2smx!4v1700000000000" 
                     title="Ubicación Diseñarte México Publicidad" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
@@ -78,7 +77,7 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
               <h3 class="text-xl md:text-2xl font-avenir-black uppercase mb-4 text-white">Publicidad</h3>
               <ul class="space-y-2 text-xs md:text-sm font-avenir-book mb-4 text-white/90">
                 <li class="flex items-center justify-center gap-2"><span>📞</span> 427 211 05 28</li>
-                <li class="flex items-center justify-center gap-2"><span>✉️</span> ventas@rotulosdisenarte.com</li>
+                <li class="flex items-center justify-center gap-2"><span>✉️</span> ventas@disenartemx.com</li>
               </ul>
               <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-xs text-white/80 leading-snug">
                 Av. Lomas del pedregoso #371.<br/>Col. Lomas de San Juan.
@@ -89,7 +88,7 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
           <article class="location-card group">
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps?q=Diseñarte+México+Marketing+Digital+Av.+Mármol+5+San+Juan+del+Río&output=embed" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.010101010101!2d-99.98!3d20.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDIyJzQ4LjAiTiA5OcKwNTknMjQuMCJX!5e0!3m2!1ses-419!2smx!4v1700000000000" 
                     title="Ubicación Diseñarte México Marketing" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
@@ -115,33 +114,48 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
   </main>
 </Layout>
 
-<script is:inline define:vars={{ PHP_ACTION_URL }}>
+<script is:inline>
+  // Detectamos el dominio actual dinámicamente para evitar el error de CORS
+  const PHP_ACTION_URL = `${window.location.origin}/procesar.php`;
+
   const form = document.getElementById('contact-form');
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Estado de carga
     btn.disabled = true;
     btn.style.opacity = "0.7";
     btnText.innerText = "ENVIANDO SOLICITUD...";
 
     const formData = new FormData(form);
+
     try {
       const response = await fetch(PHP_ACTION_URL, {
         method: 'POST',
+        mode: 'cors', // Asegura el intercambio de recursos entre orígenes si es necesario
         body: formData,
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const result = await response.json();
+
       if (result.status === 'success') {
-        alert("¡Mensaje enviado con éxito!");
+        alert("¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.");
         form.reset();
       } else {
-        alert("Error: " + result.message);
+        alert("Atención: " + result.message);
       }
     } catch (error) {
-      alert("Error de conexión con el servidor.");
+      console.error("Error en el envío:", error);
+      alert("Hubo un error de conexión con el servidor. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
     } finally {
+      // Restaurar botón
       btn.disabled = false;
       btn.style.opacity = "1";
       btnText.innerText = "ENVIAR SOLICITUD";
@@ -207,6 +221,12 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
       background-color: #712c91;
       border: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+      background-color: #5a2374;
+      transform: translateY(-2px);
   }
 
   .location-card {
