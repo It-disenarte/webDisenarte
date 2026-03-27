@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/wp-admin",
+      "destination": "https://panel.disenartemx.com/wp-admin",
+      "permanent": false
+    },
+    {
+      "source": "/login",
+      "destination": "https://panel.disenartemx.com/wp-login.php",
+      "permanent": false
+    }
+  ]
+}

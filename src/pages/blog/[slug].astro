@@ -1,6 +1,7 @@
 ---
 // @ts-nocheck
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 
 /**
  * 1. GENERACIÓN ESTÁTICA (SSG)
@@ -20,16 +21,43 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-// 3. SEO y Limpieza de texto
+// 3. SEO y Limpieza de texto (Mejorada para evitar caracteres raros de WP)
 const seoTitle = `${post.title.rendered} | Blog Diseñarte México`;
 const seoDescription = post.excerpt.rendered
-  ? post.excerpt.rendered.replace(/<[^>]*>?/gm, '').substring(0, 160)
+  ? post.excerpt.rendered
+      .replace(/<[^>]*>?/gm, '') // Quita HTML
+      .replace(/&nbsp;/g, ' ')   // Quita espacios de WP
+      .replace(/\s+/g, ' ')      // Quita saltos de línea
+      .trim()
+      .substring(0, 160)
   : "Lee nuestro último artículo en el blog de Diseñarte México";
+
+const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} image={featuredImage}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title.rendered,
+    "description": seoDescription,
+    "image": featuredImage,
+    "datePublished": post.date,
+    "author": {"@type": "Organization", "name": "Diseñarte México"}
+  })} />
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.disenartemx.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.disenartemx.com/blog" },
+      { "@type": "ListItem", "position": 3, "name": post.title.rendered, "item": canonicalURL }
+    ]
+  })} />
+
   <article class="post-article-container">
-    
     <div class="max-w-4xl mx-auto px-6">
       
       <header class="mb-16 text-center">
@@ -47,9 +75,12 @@ const seoDescription = post.excerpt.rendered
 
       {post._embedded && post._embedded['wp:featuredmedia'] && (
         <div class="featured-image-wrapper">
-          <img 
+          <Image 
             src={post._embedded['wp:featuredmedia'][0].source_url} 
             alt={post.title.rendered}
+            width={1200}
+            height={630}
+            format="webp"
             class="w-full h-auto object-cover"
           />
         </div>
@@ -138,7 +169,6 @@ const seoDescription = post.excerpt.rendered
       box-shadow: 0 10px 15px -3px rgba(124, 7, 166, 0.3);
   }
 
-  /* Estilizado del contenido de WordPress */
   .content-body {
       color: #374151;
       font-size: 1.125rem;

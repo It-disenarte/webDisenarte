@@ -8,9 +8,11 @@ import WhatsAppFloater from '../components/WhatsAppFloater.astro';
 interface Props {
     title: string;
     description: string;
+    image?: string; // Añadimos la prop de imagen como opcional
 }
 
-const { title, description } = Astro.props;
+const { title, description, image = '/images/LOGO.webp' } = Astro.props; // Imagen por defecto si no hay una
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -18,9 +20,25 @@ const { title, description } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <meta name="description" content={description} />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+
         <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
         <ClientRouter />
     </head>
     <body class="bg-white text-gray-900">
@@ -57,7 +75,6 @@ const { title, description } = Astro.props;
         <script is:inline>
             document.addEventListener('astro:before-preparation', (event) => {
                 const loader = document.getElementById('global-loader');
-                // Solo activamos clics bloqueantes si vamos al blog
                 if (loader && event.to.pathname.includes('/blog')) {
                     loader.classList.remove('hidden');
                     loader.style.pointerEvents = 'auto'; 
@@ -68,7 +85,7 @@ const { title, description } = Astro.props;
                 const loader = document.getElementById('global-loader');
                 if (loader) {
                     loader.classList.add('hidden');
-                    loader.style.pointerEvents = 'none'; // Importante para liberar el Navbar
+                    loader.style.pointerEvents = 'none';
                 }
             });
         </script>

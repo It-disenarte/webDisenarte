@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Bloquear rutas sensibles del backend si accidentalmente se reflejan
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-json/
+
+#  Sitemap real (el de Astro en Vercel)
+Sitemap: https://www.disenartemx.com/sitemap-index.xml

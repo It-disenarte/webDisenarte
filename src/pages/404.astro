@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const seoTitle = "Página no encontrada | Diseñarte México";
+const seoDescription = "Lo sentimos, la página que buscas no existe o ha sido movida.";
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <section class="error-404-container flex items-center justify-center">
+    <div class="max-w-2xl mx-auto px-6 text-center reveal">
+      
+      <span class="error-code font-avenir-black">404</span>
+      
+      <h1 class="text-4xl md:text-6xl font-avenir-black leading-[1.1] mb-8 text-gray-900 uppercase tracking-tighter">
+        Vaya, parece que te has <br/> <span class="text-purple-post">perdido un poco</span>
+      </h1>
+
+      <p class="text-xl font-avenir-book text-gray-600 mb-12 max-w-lg mx-auto leading-relaxed">
+        La página que buscas no existe o fue movida.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="/" class="btn-primary font-avenir-black uppercase text-sm tracking-widest">
+            Ir al Inicio
+        </a>
+        <a href="/blog" class="btn-secondary font-avenir-black uppercase text-sm tracking-widest">
+            Ver el Blog
+        </a>
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<style>
+  :root {
+      --purple-post: #7C07A6;
+  }
+
+  .text-purple-post {
+      color: var(--purple-post);
+  }
+
+  .error-404-container {
+      min-height: 80vh;
+      background-color: #ffffff;
+      padding-top: 5rem;
+  }
+
+  .error-code {
+      display: block;
+      font-size: 8rem;
+      line-height: 1;
+      color: #f3f4f6;
+      margin-bottom: -2rem;
+      user-select: none;
+  }
+
+  .font-avenir-black {
+      font-family: 'Avenir Black', sans-serif;
+      font-weight: 900;
+  }
+
+  .font-avenir-book {
+      font-family: 'Avenir Book', sans-serif;
+  }
+
+  .btn-primary {
+      background-color: var(--purple-post);
+      color: #ffffff;
+      padding: 1.25rem 2.5rem;
+      border-radius: 9999px;
+      transition: all 0.5s ease;
+      box-shadow: 0 10px 15px -3px rgba(124, 7, 166, 0.2);
+  }
+
+  .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 20px -3px rgba(124, 7, 166, 0.4);
+  }
+
+  .btn-secondary {
+      background-color: #f9fafb;
+      color: #1a1a1a;
+      padding: 1.25rem 2.5rem;
+      border-radius: 9999px;
+      transition: all 0.5s ease;
+      border: 1px solid #e5e7eb;
+  }
+
+  .btn-secondary:hover {
+      background-color: #ffffff;
+      border-color: var(--purple-post);
+      color: var(--purple-post);
+  }
+
+  /* Animación igual a la que tienes en el index */
+  @keyframes revealUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+      animation: revealUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+</style>

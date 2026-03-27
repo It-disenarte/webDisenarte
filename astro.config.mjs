@@ -1,12 +1,30 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-// Si vas a probar local, comenta el adaptador de node un momento
-// import node from '@astrojs/node'; 
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  // Si vas a trabajar en tu compu, puedes dejarlo en 'static' o 'server'
-  // pero asegúrate de que Tailwind esté presente:
+  // URL oficial de tu sitio en Vercel para generar el sitemap.xml
+  site: 'https://www.disenartemx.com', 
+
+  // Como mencionaste que es estático, aseguramos el renderizado en el build
+  output: 'static',
+
+  image: {
+    // Esto permite que Astro convierta las imágenes de tu WP a WebP/Avif
+    // sustituye 'tu-dominio-backend.com' por el dominio donde vive tu WordPress
+    domains: ['panel.disenartemx.com'], 
+  },
+
   vite: {
     plugins: [tailwindcss()],
-  }
+  },
+
+  integrations: [
+    sitemap({
+      // Opciones extra para ayudar a los buscadores
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    })
+  ]
 });
