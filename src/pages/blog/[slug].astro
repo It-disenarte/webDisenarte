@@ -3,8 +3,7 @@
 import Layout from '../../layouts/Layout.astro';
 
 /**
- * 1. GENERACIÓN ESTÁTICA (SSG) PARA CPANEL
- * Esta función descarga los posts de WordPress y crea las rutas.
+ * 1. GENERACIÓN ESTÁTICA (SSG)
  */
 export async function getStaticPaths() {
   const wpUrl = import.meta.env.PUBLIC_WP_URL;
@@ -19,10 +18,9 @@ export async function getStaticPaths() {
   }));
 }
 
-// 2. Recibimos los datos del post
 const { post } = Astro.props;
 
-// 3. SEO y Limpieza de texto para la descripción
+// 3. SEO y Limpieza de texto
 const seoTitle = `${post.title.rendered} | Blog Diseñarte México`;
 const seoDescription = post.excerpt.rendered
   ? post.excerpt.rendered.replace(/<[^>]*>?/gm, '').substring(0, 160)
@@ -30,26 +28,25 @@ const seoDescription = post.excerpt.rendered
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <article class="bg-white min-h-screen pt-40 pb-24 overflow-hidden font-avenir-book text-[#1a1a1a]">
+  <article class="post-article-container">
     
     <div class="max-w-4xl mx-auto px-6">
       
       <header class="mb-16 text-center">
-        <div class="inline-block px-5 py-2 rounded-full bg-[#f4f4f6] text-[#7C07A6] text-xs font-avenir-black uppercase tracking-widest mb-6">
+        <div class="post-date-badge">
             {new Date(post.date).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })}
         </div>
         
         <h1 
-            class="text-4xl md:text-6xl font-avenir-black leading-[1.1] mb-8 text-[#1a1a1a] uppercase tracking-tighter" 
+            class="text-4xl md:text-6xl font-avenir-black leading-[1.1] mb-8 text-gray-900 uppercase tracking-tighter" 
             set:html={post.title.rendered} 
         />
         
-        <div class="h-1.5 w-24 bg-[#7C07A6] mx-auto opacity-80 rounded-full"></div>
+        <div class="h-1.5 w-24 bg-purple-post mx-auto opacity-80 rounded-full"></div>
       </header>
 
-      {/* Imagen Destacada */}
       {post._embedded && post._embedded['wp:featuredmedia'] && (
-        <div class="mb-16 rounded-[2.5rem] overflow-hidden shadow-2xl transform -rotate-1 border border-gray-100">
+        <div class="featured-image-wrapper">
           <img 
             src={post._embedded['wp:featuredmedia'][0].source_url} 
             alt={post.title.rendered}
@@ -58,15 +55,14 @@ const seoDescription = post.excerpt.rendered
         </div>
       )}
 
-      {/* Cuerpo del artículo */}
-      <div class="content-body prose prose-xl max-w-none leading-relaxed text-gray-700">
+      <div class="content-body">
         <div set:html={post.content.rendered} />
       </div>
 
       <footer class="mt-20 pt-10 border-t border-gray-100 flex justify-center">
-        <a href="/blog" class="group flex items-center space-x-4 bg-gray-50 hover:bg-[#7C07A6] hover:text-white px-10 py-5 rounded-full transition-all duration-500 shadow-sm hover:shadow-xl">
-            <span class="text-xl group-hover:-translate-x-2 transition-transform">←</span>
-            <span class="font-avenir-black uppercase text-sm tracking-widest">Volver al Blog</span>
+        <a href="/blog" class="back-blog-btn group">
+            <span class="text-xl transition-transform group-hover:-translate-x-2">←</span>
+            <span class="font-avenir-black uppercase text-sm tracking-widest">Volver</span>
         </a>
       </footer>
 
@@ -86,16 +82,131 @@ const seoDescription = post.excerpt.rendered
     font-weight: 900; font-style: normal; font-display: swap;
   }
 
+  :root {
+      --purple-post: #7C07A6;
+  }
+
   .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
   .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
+  .bg-purple-post { background-color: var(--purple-post); }
+
+  .post-article-container {
+      background-color: #ffffff;
+      min-height: 100vh;
+      padding-top: 10rem;
+      padding-bottom: 6rem;
+      font-family: 'Avenir Book', sans-serif;
+  }
+
+  .post-date-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      background-color: #f4f4f6;
+      color: var(--purple-post);
+      font-family: 'Avenir Black', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+  }
+
+  .featured-image-wrapper {
+      margin-bottom: 4rem;
+      border-radius: 2.5rem;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid #f3f4f6;
+      transform: rotate(-1deg);
+  }
+
+  .back-blog-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: #f9fafb;
+      padding: 1.25rem 2.5rem;
+      border-radius: 9999px;
+      transition: all 0.5s ease;
+      text-decoration: none;
+      color: #1a1a1a;
+  }
+
+  .back-blog-btn:hover {
+      background-color: var(--purple-post);
+      color: #ffffff;
+      box-shadow: 0 10px 15px -3px rgba(124, 7, 166, 0.3);
+  }
 
   /* Estilizado del contenido de WordPress */
-  .content-body p { margin-bottom: 2rem; font-size: 1.2rem; line-height: 1.8; }
-  .content-body h2 { font-family: 'Avenir Black', sans-serif; font-size: 2.5rem; margin-top: 4rem; margin-bottom: 1.5rem; color: #1a1a1a; line-height: 1.1; text-transform: uppercase; letter-spacing: -0.05em; }
-  .content-body h3 { font-family: 'Avenir Black', sans-serif; font-size: 1.8rem; margin-top: 3rem; color: #7C07A6; }
-  .content-body img { border-radius: 2rem; margin: 3.5rem auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
-  .content-body ul { list-style: none; padding-left: 1rem; margin-bottom: 2.5rem; }
-  .content-body li { position: relative; margin-bottom: 1.2rem; padding-left: 2rem; font-size: 1.15rem; }
-  .content-body li::before { content: ""; width: 8px; height: 8px; background-color: #7C07A6; border-radius: 50%; position: absolute; left: 0; top: 10px; }
-  .content-body blockquote { border-left: 8px solid #7C07A6; padding: 2.5rem; background: #fdfaff; font-style: italic; font-weight: 500; border-radius: 0 2.5rem 2.5rem 0; margin: 4rem 0; font-size: 1.4rem; color: #4a4a4a; }
+  .content-body {
+      color: #374151;
+      font-size: 1.125rem;
+      line-height: 1.8;
+  }
+
+  .content-body p { 
+      margin-bottom: 2rem; 
+      font-size: 1.2rem; 
+  }
+
+  .content-body h2 { 
+      font-family: 'Avenir Black', sans-serif; 
+      font-size: 2.5rem; 
+      margin-top: 4rem; 
+      margin-bottom: 1.5rem; 
+      color: #1a1a1a; 
+      line-height: 1.1; 
+      text-transform: uppercase; 
+      letter-spacing: -0.05em; 
+  }
+
+  .content-body h3 { 
+      font-family: 'Avenir Black', sans-serif; 
+      font-size: 1.8rem; 
+      margin-top: 3rem; 
+      color: var(--purple-post); 
+  }
+
+  .content-body img { 
+      border-radius: 2rem; 
+      margin: 3.5rem auto; 
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); 
+  }
+
+  .content-body ul { 
+      list-style: none; 
+      padding-left: 1rem; 
+      margin-bottom: 2.5rem; 
+  }
+
+  .content-body li { 
+      position: relative; 
+      margin-bottom: 1.2rem; 
+      padding-left: 2rem; 
+      font-size: 1.15rem; 
+  }
+
+  .content-body li::before { 
+      content: ""; 
+      width: 8px; 
+      height: 8px; 
+      background-color: var(--purple-post); 
+      border-radius: 50%; 
+      position: absolute; 
+      left: 0; 
+      top: 10px; 
+  }
+
+  .content-body blockquote { 
+      border-left: 8px solid var(--purple-post); 
+      padding: 2.5rem; 
+      background: #fdfaff; 
+      font-style: italic; 
+      font-weight: 500; 
+      border-radius: 0 2.5rem 2.5rem 0; 
+      margin: 4rem 0; 
+      font-size: 1.4rem; 
+      color: #4a4a4a; 
+  }
 </style>

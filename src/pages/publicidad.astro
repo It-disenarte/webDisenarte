@@ -1,6 +1,7 @@
 ---
 /**
- * DISEÑARTE MÉXICO - PÁGINA DE PUBLICIDAD (VERSION SIN MARCOS)
+ * DISEÑARTE MÉXICO - PÁGINA DE PUBLICIDAD
+ * Optimización: Estructura semántica y corrección de utilidades Tailwind.
  */
 import Layout from "../layouts/Layout.astro";
 
@@ -55,19 +56,19 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <main class="bg-[#f9f9f9] selection:bg-[#7C07A6] selection:text-white overflow-x-hidden font-avenir-book">
+  <main class="bg-[#f9f9f9] overflow-x-hidden font-avenir-book">
     
     <section class="pt-24 md:pt-32 pb-20 max-w-7xl mx-auto px-4">
       <header class="mb-16 md:mb-24 flex flex-col items-center text-center">
         <div class="max-w-4xl">
           <h1 class="text-2xl md:text-5xl font-avenir-book leading-tight text-gray-800 tracking-tight">
             <span class="font-avenir-black text-black mr-2 md:mr-3 inline-block">“</span>
-            <b class="font-avenir-black" style="color: #7C07A6;">Publicidad</b> con propósito: 
-            <b class="font-avenir-black ml-1" style="color: #7C07A6;">creamos</b> atmósferas que comunican, 
-            inspiran y <b class="font-avenir-black ml-1" style="color: #7C07A6;">transforman</b> espacios.
+            <b class="font-avenir-black text-purple-accent">Publicidad</b> con propósito: 
+            <b class="font-avenir-black ml-1 text-purple-accent">creamos</b> atmósferas que comunican, 
+            inspiran y <b class="font-avenir-black ml-1 text-purple-accent">transforman</b> espacios.
             <span class="font-avenir-black text-black ml-1">”</span>
           </h1>
-          <div class="h-1.5 w-20 bg-[#7C07A6] mx-auto mt-8 md:mt-10 rounded-full"></div>
+          <div class="h-1.5 w-20 bg-purple-accent mx-auto mt-8 md:mt-10 rounded-full"></div>
         </div>
       </header>
 
@@ -75,14 +76,14 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
         <div class="lg:col-span-7 h-[350px] md:h-[500px] lg:h-[600px] relative overflow-hidden group">
           {slides.map((slide, index) => (
             <div class={`absolute inset-0 transition-all duration-700 ease-in-out transform ${index === 0 ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 z-0'}`} data-slide-img={index}>
-              <img src={slide.imagen} alt={slide.titulo} class="w-full h-full object-contain" />
+              <img src={slide.imagen} alt={slide.titulo} class="w-full h-full object-contain" loading={index === 0 ? "eager" : "lazy"} />
             </div>
           ))}
           <nav class="absolute inset-0 z-30 pointer-events-none flex items-center justify-between px-0">
-            <button id="prev-btn" class="pointer-events-auto p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-sm text-white hover:bg-[#7C07A6] transition-all" aria-label="Anterior">
+            <button id="prev-btn" class="pointer-events-auto p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-sm text-white hover:bg-purple-accent transition-all" aria-label="Anterior">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <button id="next-btn" class="pointer-events-auto p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-sm text-white hover:bg-[#7C07A6] transition-all" aria-label="Siguiente">
+            <button id="next-btn" class="pointer-events-auto p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-sm text-white hover:bg-purple-accent transition-all" aria-label="Siguiente">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
           </nav>
@@ -91,11 +92,11 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
         <article class="lg:col-span-5 relative min-h-[400px] flex items-center">
           {slides.map((slide, index) => (
             <div class={`absolute inset-0 transition-all duration-500 flex flex-col justify-center ${index === 0 ? 'visible-slide' : 'hidden-slide'}`} data-slide-text={index}>
-              <h2 class="text-3xl md:text-4xl font-avenir-black uppercase tracking-tighter mb-6 leading-none" style="color: #7C07A6;">{slide.titulo}</h2>
+              <h2 class="text-3xl md:text-4xl font-avenir-black uppercase tracking-tighter mb-6 leading-none text-purple-accent">{slide.titulo}</h2>
               <ul class="space-y-1.5 md:space-y-2">
                 {slide.puntos.map((punto) => (
                   <li class="flex items-start space-x-3 text-base md:text-[17px] text-gray-600 font-avenir-book leading-tight">
-                    <span class="font-avenir-black text-lg leading-none" style="color: #7C07A6;">/</span><span>{punto}</span>
+                    <span class="font-avenir-black text-lg leading-none text-purple-accent">/</span><span>{punto}</span>
                   </li>
                 ))}
               </ul>
@@ -109,9 +110,9 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
       <div class="max-w-[1600px] mx-auto px-4 md:px-10">
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-10 md:gap-20 items-stretch">
           
-          <div class="flex flex-col">
+          <article class="flex flex-col">
             <header class="mb-10">
-              <h2 class="text-3xl md:text-5xl font-avenir-black tracking-tighter uppercase leading-none" style="color: #7C07A6;">
+              <h2 class="text-3xl md:text-5xl font-avenir-black tracking-tighter uppercase leading-none text-purple-accent">
                 “Imagen <span class="font-avenir-book text-black">corporativa</span>”
               </h2>
             </header>
@@ -120,7 +121,7 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
                 <div class="relative h-24 flex items-center">
                   {transformacion.map((item, i) => (
                     <div id={`text-trans-${item.id}`} class={`absolute inset-x-0 transition-all duration-500 transform ${i === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-                      <h3 class="text-2xl md:text-4xl font-avenir-black uppercase leading-none tracking-tighter" style="color: #7C07A6;">
+                      <h3 class="text-2xl md:text-4xl font-avenir-black uppercase leading-none tracking-tighter text-purple-accent">
                         “{item.negrita} <span class="font-avenir-book text-black">{item.etiqueta.replace(item.negrita, '')}</span>”
                       </h3>
                     </div>
@@ -129,9 +130,9 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
                 <div class="flex gap-6 mt-8">
                   {transformacion.map((item, i) => (
                     <button data-target-trans={item.id} class={`group flex flex-col gap-3 transition-all duration-300 cursor-pointer ${i === 0 ? 'opacity-100' : 'opacity-30 hover:opacity-100'}`}>
-                      <span class="text-2xl font-avenir-black" style="color: #7C07A6;">{item.id}</span>
+                      <span class="text-2xl font-avenir-black text-purple-accent">{item.id}</span>
                       <div class="h-1.5 w-12 bg-gray-100 rounded-full overflow-hidden">
-                        <div id={`bar-trans-${item.id}`} class={`h-full transition-all duration-500 ${i === 0 ? 'w-full' : 'w-0'}`} style="background-color: #7C07A6;"></div>
+                        <div id={`bar-trans-${item.id}`} class={`h-full transition-all duration-500 ${i === 0 ? 'w-full' : 'w-0'} bg-purple-accent`}></div>
                       </div>
                     </button>
                   ))}
@@ -140,16 +141,16 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
               <div class="flex-1 relative bg-black overflow-hidden min-h-[300px]">
                 {transformacion.map((item, i) => (
                   <div id={`img-trans-${item.id}`} class={`absolute inset-0 transition-all duration-1000 transform scale-110 ${i === 0 ? 'opacity-100 scale-100 z-10' : 'opacity-0 z-0'}`}>
-                    <img src={item.imagen} alt={item.etiqueta} class="w-full h-full object-cover" />
+                    <img src={item.imagen} alt={item.etiqueta} class="w-full h-full object-cover" loading="lazy" />
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="flex flex-col">
+          <article class="flex flex-col">
             <header class="mb-10">
-              <h2 class="text-3xl md:text-5xl font-avenir-black tracking-tighter uppercase leading-none" style="color: #7C07A6;">
+              <h2 class="text-3xl md:text-5xl font-avenir-black tracking-tighter uppercase leading-none text-purple-accent">
                 “Material <span class="font-avenir-book text-black">POP</span>”
               </h2>
             </header>
@@ -157,21 +158,21 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
               <div class="grid grid-cols-2 gap-y-4 gap-x-2">
                 {popItems.map((item) => (
                  <div class="flex items-center space-x-2 group">
-                    <span class="font-avenir-black opacity-30 group-hover:opacity-100 transition-opacity" style="color: #7C07A6;">/</span>
+                    <span class="font-avenir-black opacity-30 group-hover:opacity-100 transition-opacity text-purple-accent">/</span>
                     <span class="text-sm md:text-base font-avenir-book text-gray-600 group-hover:text-black transition-colors">{item}</span>
                   </div>
                 ))}
               </div>
               <div class="relative h-[300px] md:h-[400px] flex items-center justify-center">
                 <div class="absolute w-[110%] h-[110%] -left-10 top-0 overflow-hidden transform -rotate-6 z-10 scale-110">
-                  <img src="/images/assets/MATERIAL POP1.webp" alt="material POP1" class="w-full h-full object-contain opacity-100" />
+                  <img src="/images/assets/MATERIAL POP1.webp" alt="Muestra de material POP 1" class="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <div class="absolute w-[75%] h-[75%] -right-10 -bottom-10 overflow-hidden transform rotate-6 z-20">
-                  <img src="/images/assets/MATERIAL POP2.webp" alt="material POP2" class="w-full h-full object-contain" />
+                  <img src="/images/assets/MATERIAL POP2.webp" alt="Muestra de material POP 2" class="w-full h-full object-contain" loading="lazy" />
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
         </div>
       </div>
@@ -191,15 +192,27 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
     font-weight: 900; font-style: normal; font-display: swap;
   }
 
+  :root {
+      --purple-accent: #7C07A6;
+  }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .text-purple-accent { color: var(--purple-accent); }
+  .bg-purple-accent { background-color: var(--purple-accent); }
   .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
   .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
   
   .visible-slide { opacity: 1 !important; transform: translateX(0) !important; z-index: 10; pointer-events: auto; }
   .hidden-slide { opacity: 0 !important; transform: translateX(20px) !important; z-index: 0; pointer-events: none; }
+
+  ::selection {
+      background-color: var(--purple-accent);
+      color: white;
+  }
 </style>
 
 <script>
@@ -266,6 +279,7 @@ const popItems = ["Volantes", "Tarjetas", "Formatos", "Calendarios", "Etiquetas"
     });
   }
 
+  // Ejecución inicial y en cambios de página (View Transitions)
   initPublicidad();
   document.addEventListener('astro:page-load', initPublicidad);
 </script>

@@ -1,77 +1,74 @@
 ---
 /**
- * DISEÑARTE MÉXICO - PÁGINA DE CONTACTO 
- * Fix: Envío de formulario vía AJAX hacia cPanel (PHP)
+ * PÁGINA: CONTACTO - Diseñarte México
+ * Arquitectura: Astro + Tailwind CSS
  */
 import Layout from "../layouts/Layout.astro";
 
 const seoTitle = "Agenda una sesión | Contacto | Diseñarte México";
-const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus proyectos de publicidad y marketing digital.";
+const seoDescription = "Reserva una cita con nuestros agentes de ventas para tus proyectos de publicidad y marketing digital en San Juan del Río.";
 
-// URL de tu archivo en el cPanel
 const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <main class="bg-[#f4f4f4] min-h-screen pt-16 md:pt-24 lg:pt-32 pb-16 selection:bg-[#712c91] selection:text-white font-avenir-book overflow-x-hidden relative">
+  <main class="bg-[#f4f4f4] min-h-screen pt-16 md:pt-24 lg:pt-32 pb-16 font-avenir-book overflow-x-hidden relative">
     
     <div class="max-w-[1550px] mx-auto px-4 md:px-8 lg:px-12">
       
       <header class="mb-10 md:mb-16 flex flex-col items-start max-w-5xl">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-avenir-book tracking-tighter uppercase leading-[1.1] mb-6 text-[#1a1a1a]">
-          ¡<span class="font-avenir-black text-[#712c91]">Agenda una sesión</span> con uno de nuestros agentes de ventas <span class="font-avenir-black text-[#712c91]">para revisar tu proyecto!</span>
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-avenir-book tracking-tighter uppercase leading-[1.1] mb-6 text-gray-900">
+          ¡<span class="font-avenir-black text-purple-accent">Agenda una sesión</span> con uno de nuestros agentes de ventas <span class="font-avenir-black text-purple-accent">para revisar tu proyecto!</span>
         </h1>
-        <div class="h-1.5 w-24 bg-[#712c91] opacity-70 rounded-full"></div>
+        <div class="h-1.5 w-24 bg-purple-accent opacity-70 rounded-full"></div>
       </header>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
         
-        {/* --- FORMULARIO --- */}
         <section class="lg:col-span-5 bg-[#e2e4e6] p-7 md:p-10 lg:p-12 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-gray-200 relative z-20">
           <h2 class="sr-only">Formulario de contacto</h2>
           
           <form id="contact-form" class="space-y-6">
             <div class="space-y-2">
-              <label for="nombre" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Nombre completo*</label>
-              <input type="text" id="nombre" name="nombre" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+              <label for="nombre" class="form-label">Nombre completo*</label>
+              <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="Ej. Juan Pérez" />
             </div>
 
             <div class="space-y-2">
-              <label for="telefono" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Teléfono*</label>
-              <input type="tel" id="telefono" name="telefono" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+              <label for="telefono" class="form-label">Teléfono*</label>
+              <input type="tel" id="telefono" name="telefono" required class="form-input" placeholder="427 000 0000" />
             </div>
 
             <div class="space-y-2">
-              <label for="correo" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Correo Electrónico*</label>
-              <input type="email" id="correo" name="correo" required class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+              <label for="correo" class="form-label">Correo Electrónico*</label>
+              <input type="email" id="correo" name="correo" required class="form-input" placeholder="correo@ejemplo.com" />
             </div>
 
             <div class="space-y-2">
-                <label for="empresa" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Empresa (Opcional)</label>
-                <input type="text" id="empresa" name="empresa" class="w-full px-5 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 shadow-sm" />
+                <label for="empresa" class="form-label">Empresa (Opcional)</label>
+                <input type="text" id="empresa" name="empresa" class="form-input" placeholder="Nombre de tu negocio" />
             </div>
 
             <div class="space-y-2">
-              <label for="mensaje" class="block text-sm font-avenir-black text-[#66bcc9] uppercase tracking-wide">Mensaje*</label>
-              <textarea id="mensaje" name="mensaje" rows="4" required class="w-full px-5 py-4 rounded-[2rem] bg-white border-none focus:ring-2 focus:ring-[#66bcc9] outline-none transition-all text-gray-800 resize-none shadow-sm"></textarea>
+              <label for="mensaje" class="form-label">Mensaje*</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required class="form-input rounded-[2rem] resize-none" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
             </div>
 
             <div class="pt-4">
-              <button type="submit" id="submit-btn" class="w-full bg-[#712c91] text-white font-avenir-black uppercase py-5 rounded-xl shadow-lg hover:bg-[#5a2375] transition-all duration-300 text-xl flex items-center justify-center space-x-3 active:scale-95 tracking-widest cursor-pointer">
+              <button type="submit" id="submit-btn" class="btn-submit">
                 <span id="btn-text">ENVIAR SOLICITUD</span>
               </button>
             </div>
           </form>
         </section>
 
-        {/* --- TARJETAS DE UBICACIÓN --- */}
         <aside class="lg:col-span-7 space-y-24 lg:space-y-12 relative z-10 lg:pl-20">
           
-          <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
-            <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
+          <article class="location-card group">
+            <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3743.834066914619!2d-99.9818815!3d20.3175404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b968a30147d%3A0xe7a505b229792686!2sDise%C3%B1arte%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1711410000000!5m2!1ses-419!2smx" 
-                    title="Ubicación Publicidad" 
+                    src="https://www.google.com/maps?q=Diseñarte+México+Publicidad+Av.+Lomas+del+pedregoso+371+San+Juan+del+Río&output=embed" 
+                    title="Ubicación Diseñarte México Publicidad" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
                     loading="lazy">
@@ -79,19 +76,21 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
             </div>
             <div class="contact-info-block">
               <h3 class="text-xl md:text-2xl font-avenir-black uppercase mb-4 text-white">Publicidad</h3>
-              <ul class="space-y-2 text-[11px] md:text-xs font-avenir-book mb-4 text-white/90">
-                <li>📞 427 211 05 28</li>
-                <li>✉️ ventas@rotulosdisenarte.com</li>
+              <ul class="space-y-2 text-xs md:text-sm font-avenir-book mb-4 text-white/90">
+                <li class="flex items-center justify-center gap-2"><span>📞</span> 427 211 05 28</li>
+                <li class="flex items-center justify-center gap-2"><span>✉️</span> ventas@rotulosdisenarte.com</li>
               </ul>
-              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-[11px] text-white/80 leading-snug">Av. Lomas del pedregoso #371. Col. Lomas de San Juan.</p>
+              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-xs text-white/80 leading-snug">
+                Av. Lomas del pedregoso #371.<br/>Col. Lomas de San Juan.
+              </p>
             </div>
           </article>
 
-          <article class="relative flex flex-col md:block bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl border border-gray-100 md:h-[450px] group">
-            <div class="w-full h-[250px] md:h-full overflow-hidden rounded-[2rem] md:rounded-[3rem]">
+          <article class="location-card group">
+            <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3743.5135248234855!2d-99.9961234!3d20.3308215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b83e35d1b7d%3A0x8f8c471249b5c2a!2sDise%C3%B1arte%20M%C3%A9xico%20Mkt!5e0!3m2!1ses-419!2smx!4v1711410000000!5m2!1ses-419!2smx" 
-                    title="Ubicación Marketing Digital" 
+                    src="https://www.google.com/maps?q=Diseñarte+México+Marketing+Digital+Av.+Mármol+5+San+Juan+del+Río&output=embed" 
+                    title="Ubicación Diseñarte México Marketing" 
                     class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 border-0" 
                     allowfullscreen="" 
                     loading="lazy">
@@ -99,11 +98,13 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
             </div>
             <div class="contact-info-block">
               <h3 class="text-xl md:text-2xl font-avenir-black uppercase mb-4 text-white">Marketing Digital</h3>
-              <ul class="space-y-2 text-[11px] md:text-xs font-avenir-book mb-4 text-white/90">
-                <li>💬 427 345 91 83</li>
-                <li>✉️ marketing@disenarte-mexico.org</li>
+              <ul class="space-y-2 text-xs md:text-sm font-avenir-book mb-4 text-white/90">
+                <li class="flex items-center justify-center gap-2"><span>💬</span> 427 345 91 83</li>
+                <li class="flex items-center justify-center gap-2"><span>✉️</span> marketing@disenarte-mexico.org</li>
               </ul>
-              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-[11px] text-white/80 leading-snug">Av. Mármol #5. Col. El Pedregal.</p>
+              <p class="pt-3 border-t border-white/20 px-3 text-[10px] md:text-xs text-white/80 leading-snug">
+                Av. Mármol #5.<br/>Col. El Pedregal.
+              </p>
             </div>
           </article>
 
@@ -119,34 +120,27 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
 
-  form.addEventListener('submit', async (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    // UI Loading state
     btn.disabled = true;
     btn.style.opacity = "0.7";
     btnText.innerText = "ENVIANDO SOLICITUD...";
 
     const formData = new FormData(form);
-
     try {
       const response = await fetch(PHP_ACTION_URL, {
         method: 'POST',
         body: formData,
-        // Importante: No incluir headers de Content-Type con FormData, el navegador lo hace solo.
       });
-
       const result = await response.json();
-
       if (result.status === 'success') {
-        alert("¡Mensaje enviado! " + result.message);
+        alert("¡Mensaje enviado con éxito!");
         form.reset();
       } else {
-        alert("Opps: " + result.message);
+        alert("Error: " + result.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Hubo un error de conexión con el servidor. Inténtalo de nuevo o contáctanos por WhatsApp.");
+      alert("Error de conexión con el servidor.");
     } finally {
       btn.disabled = false;
       btn.style.opacity = "1";
@@ -167,31 +161,114 @@ const PHP_ACTION_URL = "https://disenartemx.com/procesar.php";
     font-weight: 900; font-style: normal; font-display: swap;
   }
 
-  body { font-family: 'Avenir Book', sans-serif; overflow-x: hidden; }
+  :root {
+      --purple-accent: #712c91;
+      --cyan-label: #66bcc9;
+  }
+
   .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
   .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
+  .text-purple-accent { color: #712c91; }
+  .bg-purple-accent { background-color: #712c91; }
 
-  .sr-only {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+  .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-family: 'Avenir Black', sans-serif;
+      text-transform: uppercase;
+      color: #66bcc9;
+  }
+
+  .form-input {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      background-color: #ffffff;
+      border: none;
+      color: #1f2937;
+      outline: none;
+  }
+
+  .form-input:focus {
+      box-shadow: 0 0 0 2px #66bcc9;
+  }
+
+  .btn-submit {
+      width: 100%;
+      color: #ffffff;
+      font-family: 'Avenir Black', sans-serif;
+      text-transform: uppercase;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #712c91;
+      border: none;
+      cursor: pointer;
+  }
+
+  .location-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (min-width: 768px) {
+      .location-card {
+          display: block;
+          height: 450px;
+          border-radius: 3rem;
+      }
+  }
+
+  .map-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 2rem;
+  }
+
+  @media (min-width: 768px) {
+      .map-container {
+          height: 100%;
+          border-radius: 3rem;
+      }
   }
 
   .contact-info-block {
-    width: 100%; padding: 2.5rem;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; background-color: rgba(113, 44, 145, 0.98);
-    position: relative; z-index: 30;
+    width: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(113, 44, 145, 0.98);
+    position: relative;
+    z-index: 30;
   }
 
   @media (min-width: 768px) {
     .contact-info-block {
-      position: absolute; top: 50%; 
-      left: 0; transform: translate(-5rem, -50%); 
+      position: absolute; 
+      top: 50%; 
+      left: 0; 
+      transform: translate(-5rem, -50%); 
       border-radius: 9999px;
-      width: 320px; height: 320px;
-      padding: 2.5rem; background-color: rgba(113, 44, 145, 0.95);
+      width: 320px; 
+      height: 320px;
+      background-color: rgba(113, 44, 145, 0.95);
       backdrop-filter: blur(8px);
-      box-shadow: -10px 10px 30px rgba(0,0,0,0.15);
     }
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
   }
 </style>

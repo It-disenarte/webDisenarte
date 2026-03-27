@@ -1,4 +1,8 @@
 ---
+/**
+ * PÁGINA: BLOG (Índice Principal) - Diseñarte México
+ * Arquitectura: Astro + Tailwind CSS + WordPress API
+ */
 import Layout from '../../layouts/Layout.astro';
 
 // Traemos los posts desde la API
@@ -20,26 +24,24 @@ function extraerPrimeraImagen(content: string): string | null {
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <main class="bg-white pt-32 pb-20 min-h-screen text-[#1a1a1a] font-avenir-book">
+  <main class="main-blog-container">
     <div class="max-w-7xl mx-auto px-4">
       
-      {/* --- ENCABEZADO --- */}
       <header class="mb-16 text-left max-w-4xl">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-avenir-book text-gray-900 leading-[1.1] uppercase tracking-tighter">
-              Últimos <span class="font-avenir-black text-[#7C07A6]">artículos</span>
+              Últimos <span class="font-avenir-black text-purple-blog">artículos</span>
           </h1>
-          <div class="h-1.5 w-24 bg-[#7C07A6] mt-6 opacity-80 rounded-full"></div>
+          <div class="h-1.5 w-24 bg-purple-blog mt-6 opacity-80 rounded-full"></div>
       </header>
 
-      {/* --- GRID DE SOLO 3 ARTÍCULOS --- */}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
         {latestPosts.map((post: any) => {
           const urlPrimeraImagen = extraerPrimeraImagen(post.content.rendered);
 
           return (
-            <article class="group bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 flex flex-col">
+            <article class="blog-card group">
               
-              <div class="aspect-[4/3] overflow-hidden bg-gray-200">
+              <div class="card-image-wrapper">
                 {urlPrimeraImagen ? (
                   <img 
                     src={urlPrimeraImagen} 
@@ -48,32 +50,34 @@ function extraerPrimeraImagen(content: string): string | null {
                     loading="lazy"
                   />
                 ) : (
-                  <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 font-bold uppercase tracking-widest text-xs">
-                    <span class="text-center px-4 font-avenir-black">Diseñarte <br/> México</span>
+                  <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+                    <span class="text-center px-4 font-avenir-black uppercase tracking-widest text-xs">
+                      Diseñarte <br/> México
+                    </span>
                   </div>
                 )}
               </div>
 
               <div class="p-10 flex flex-col flex-grow">
-                <span class="text-xs font-black uppercase tracking-widest text-[#7C07A6] mb-4 block">
+                <span class="text-xs font-avenir-black uppercase tracking-widest text-purple-blog mb-4 block">
                   {new Date(post.date).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}
                 </span>
                 
                 <h2 
-                  class="text-2xl font-black mb-4 leading-tight group-hover:text-[#7C07A6] transition-colors line-clamp-2"
+                  class="text-2xl font-avenir-black mb-4 leading-tight group-hover:text-purple-blog transition-colors line-clamp-2 text-gray-900"
                   set:html={post.title.rendered} 
                 />
                 
                 <div 
-                  class="text-gray-500 font-light line-clamp-3 mb-8 text-lg leading-relaxed flex-grow"
+                  class="text-gray-500 font-avenir-book line-clamp-3 mb-8 text-lg leading-relaxed flex-grow opacity-80"
                   set:html={post.excerpt.rendered} 
                 />
 
-                <a href={`/blog/${post.slug}`} class="inline-flex items-center space-x-3 group/btn mt-auto">
-                  <div class="w-10 h-10 rounded-full bg-[#7C07A6] flex items-center justify-center text-white transition-transform group-hover/btn:translate-x-2">
+                <a href={`/blog/${post.slug}`} class="inline-flex items-center space-x-3 group/btn mt-auto no-underline">
+                  <div class="w-10 h-10 rounded-full bg-purple-blog flex items-center justify-center text-white transition-transform group-hover/btn:translate-x-2">
                     <span class="text-xl">→</span>
                   </div>
-                  <span class="font-black uppercase text-sm tracking-tighter">Leer artículo</span>
+                  <span class="font-avenir-black uppercase text-sm tracking-tighter text-gray-900">Leer artículo</span>
                 </a>
               </div>
             </article>
@@ -81,7 +85,6 @@ function extraerPrimeraImagen(content: string): string | null {
         })}
       </div>
 
-      {/* --- BOTÓN CONOCE MÁS (Redirige a la pantalla con todos los posts) --- */}
       <div class="flex justify-center">
         <a href="/blog/todos" class="btn-custom-blog">
             <div class="plus-side"><span>+</span></div>
@@ -94,6 +97,7 @@ function extraerPrimeraImagen(content: string): string | null {
 </Layout>
 
 <style is:global>
+    /** 1. TIPOGRAFÍA **/
     @font-face {
         font-family: 'Avenir Book';
         src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
@@ -105,16 +109,55 @@ function extraerPrimeraImagen(content: string): string | null {
         font-weight: 900; font-style: normal; font-display: swap;
     }
 
+    :root {
+        --purple-blog: #7C07A6;
+    }
+
     .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
     .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
-    
-    .group:hover h2 { color: #7C07A6 !important; }
+    .text-purple-blog { color: #7C07A6; }
+    .bg-purple-blog { background-color: #7C07A6; }
 
-    /* ESTILOS DEL BOTÓN PERSONALIZADO */
+    .main-blog-container {
+        background-color: #ffffff;
+        padding-top: 8rem;
+        padding-bottom: 5rem;
+        min-height: 100vh;
+        font-family: 'Avenir Book', sans-serif;
+        overflow-x: hidden;
+    }
+
+    /** 2. TARJETAS DE BLOG **/
+    .blog-card {
+        background-color: #f9fafb;
+        border-radius: 2.5rem;
+        overflow: hidden;
+        border: 1px solid #f3f4f6;
+        transition: all 0.5s ease;
+        display: flex;
+        flex-direction: column;
+    }
+    .blog-card:hover {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        transform: translateY(-0.75rem);
+    }
+
+    .card-image-wrapper {
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background-color: #e5e7eb;
+        border-top-left-radius: 2.5rem;
+        border-top-right-radius: 2.5rem;
+    }
+
+    /** 3. BOTÓN PERSONALIZADO "CONOCE MÁS" **/
     .btn-custom-blog {
-        display: inline-flex; align-items: center;
-        background-color: #f4f4f6; border-radius: 100px;
-        text-decoration: none; overflow: hidden;
+        display: inline-flex; 
+        align-items: center;
+        background-color: #f4f4f6; 
+        border-radius: 9999px;
+        text-decoration: none; 
+        overflow: hidden;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
@@ -123,13 +166,33 @@ function extraerPrimeraImagen(content: string): string | null {
         box-shadow: 0 10px 25px rgba(124, 7, 166, 0.15);
     }
     .plus-side { 
-        background-color: #7C07A6; color: white; 
-        width: 60px; height: 60px; 
-        display: flex; justify-content: center; align-items: center; 
-        font-size: 1.8rem; 
+        background-color: #7C07A6; 
+        color: #ffffff; 
+        width: 60px; 
+        height: 60px; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        font-size: 1.75rem; 
     }
     .text-side { 
-        color: #1a1a1a; font-size: 0.9rem; 
-        padding: 0 40px 0 25px; letter-spacing: 1px; 
+        color: #1a1a1a; 
+        font-size: 0.875rem; 
+        padding: 0 40px 0 25px; 
+        letter-spacing: 0.05em; 
+    }
+
+    /* Helpers */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 </style>

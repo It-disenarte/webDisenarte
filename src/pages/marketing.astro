@@ -1,16 +1,17 @@
 ---
 /**
- * DISEÑARTE MÉXICO - PÁGINA DE MARKETING DIGITAL (FONDO EXTENDIDO)
- * --------------------------------------------------
- * Afinaciones:
- * 1. Fondo (collageBg) extendido hasta el final de la sección (contacto con footer).
- * 2. Posición de fotos superpuestas mantenida en la zona inferior derecha.
+ * PÁGINA: MARKETING DIGITAL - Diseñarte México
+ * Arquitectura: Astro + Tailwind CSS
+ * Ajuste: Ocultar imagen de fondo del collage en móviles (max-width: 1024px).
  */
+
 import Layout from "../layouts/Layout.astro";
 
+// --- CONFIGURACIÓN DE SEO ---
 const seoTitle = "Marketing Digital Estratégico | Diseñarte México";
-const seoDescription = "Desarrollamos sistemas de adquisición de clientes y estrategias personalizadas.";
+const seoDescription = "Desarrollamos sistemas de adquisición de clientes y estrategias personalizadas para potenciar la visibilidad de tu marca en el sector industrial.";
 
+// --- ACTIVOS DIGITALES ---
 const images = {
   heroDetail: "/images/assets/marketing.webp",
   logoCohete: "/images/assets/ICON (1).webp",
@@ -29,36 +30,44 @@ const servicios = [
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <main class="pt-32 pb-0 bg-white selection:bg-[#7C07A6] selection:text-white overflow-x-hidden font-avenir-book">
+  <main class="pt-32 pb-0 bg-white overflow-x-hidden font-avenir-book text-gray-800">
     
-    <section class="px-4 mb-24 lg:mb-32">
+    <section class="px-4 mb-24 lg:mb-32" aria-labelledby="marketing-heading">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <div class="order-2 lg:order-1 relative group overflow-hidden">
+          
+          <div class="order-2 lg:order-1 relative group overflow-hidden rounded-2xl">
             <img 
               src={images.heroDetail} 
-              alt="Estrategia MKT" 
-              class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" 
+              alt="Análisis de estrategia de marketing digital" 
+              class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+              loading="eager"
             />
           </div>
 
           <article class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 order-1 lg:order-2">
             <header class="flex flex-col md:flex-row items-center gap-6">
-              <img src={images.logoCohete} alt="Cohete" class="h-16 md:h-20 w-auto animate-float-slow" />
-              <h1 class="text-4xl md:text-6xl font-avenir-black uppercase tracking-tighter leading-none" style="color: #7C07A6;">
+              <img 
+                src={images.logoCohete} 
+                alt="Icono de crecimiento" 
+                class="h-16 md:h-20 w-auto animate-float-slow" 
+              />
+              <h1 id="marketing-heading" class="text-4xl md:text-6xl font-avenir-black uppercase tracking-tighter leading-none text-purple-accent">
                 Marketing <span class="text-black">Digital</span>
               </h1>
             </header>
+
             <div class="space-y-6 max-w-xl">
-              <p class="text-lg md:text-xl font-avenir-book text-gray-800 leading-relaxed">
+              <p class="text-lg md:text-xl font-avenir-book leading-relaxed">
                 Desarrollamos un sistema de adquisición de clientes que permite analizar de forma estratégica las necesidades de su empresa, evaluar el estado actual de sus redes sociales y definir proyecciones de crecimiento.
               </p>
-              <div class="h-1.5 w-24 bg-[#7C07A6] mx-auto lg:mx-0 rounded-full opacity-60"></div>
-              <p class="text-lg md:text-xl font-avenir-book text-gray-800 leading-relaxed">
+              <div class="h-1.5 w-24 bg-purple-accent mx-auto lg:mx-0 rounded-full opacity-60"></div>
+              <p class="text-lg md:text-xl font-avenir-book leading-relaxed">
                 Con base en este diagnóstico, seleccionamos los canales digitales más adecuados y diseñamos una estrategia personalizada, orientada a resultados y objetivos comerciales.
               </p>
+              
               <div class="pt-6">
-                <p class="text-2xl md:text-3xl font-avenir-book leading-tight tracking-tight" style="color: #7C07A6;">
+                <p class="text-2xl md:text-3xl font-avenir-book leading-tight tracking-tight text-purple-accent">
                   “Estrategias digitales diseñadas... <b class="font-avenir-black ml-1">para resultados tangibles.</b>”
                 </p>
               </div>
@@ -72,15 +81,15 @@ const servicios = [
       <div class="max-w-7xl mx-auto w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-stretch">
           
-          <div class="flex flex-col items-center lg:items-start space-y-12 pb-24">
+          <article class="flex flex-col items-center lg:items-start space-y-12 pb-24">
             <div class="w-full">
-              <h2 class="text-xl font-avenir-book uppercase tracking-[0.2em] mb-8 text-center lg:text-left" style="color: #7C07A6;">
+              <h2 class="text-xl font-avenir-book uppercase tracking-[0.2em] mb-8 text-center lg:text-left text-purple-accent">
                 Conoce nuestros servicios:
               </h2>
               <ul class="space-y-5">
                 {servicios.map((s) => (
                   <li class="flex items-center space-x-4 text-lg md:text-xl text-gray-700 font-avenir-book group">
-                    <span class="text-2xl group-hover:scale-125 transition-transform" style="color: #7C07A6;">✓</span>
+                    <span class="text-2xl group-hover:scale-125 transition-transform text-purple-accent" aria-hidden="true">✓</span>
                     <span>{s.texto}</span>
                   </li>
                 ))}
@@ -88,35 +97,35 @@ const servicios = [
             </div>
 
             <div class="w-full flex justify-center lg:justify-start">
-              <a href="/contacto" class="bg-[#7C07A6] hover:bg-[#5a2484] text-white px-10 py-3 rounded-full text-sm font-avenir-black shadow-lg uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95">
+              <a href="/contacto" class="btn-primary">
                 Contáctanos
               </a>
             </div>
 
             <div class="pt-8 w-full select-none">
               <h2 class="text-6xl md:text-[7.5rem] font-avenir-black tracking-tighter leading-[0.75] uppercase text-center lg:text-left">
-                <span class="block" style="color: #7C07A6;">“Haz que</span>
-                <span class="text-[#facc15] flex items-center justify-center lg:justify-start">
+                <span class="block text-purple-accent">“Haz que</span>
+                <span class="text-yellow-400 flex items-center justify-center lg:justify-start">
                   <span class="text-7xl md:text-[9.5rem] mr-2">+</span>gente
                 </span>
-                <span class="block" style="color: #7C07A6;">te vea”</span>
+                <span class="block text-purple-accent">te vea”</span>
               </h2>
             </div>
-          </div>
+          </article>
 
-          <aside class="relative w-full flex items-stretch lg:justify-end min-h-[700px]">
-            <div class="relative w-full max-w-[500px] md:max-w-[600px]">
+          <aside class="relative w-full flex items-stretch lg:justify-end min-h-[450px] lg:min-h-[700px]">
+            <div class="relative w-full max-w-[500px] md:max-w-[600px] mb-20 lg:mb-0">
               
-              <div class="absolute -left-10 top-0 w-[100%] h-full overflow-hidden z-0 bg-gray-100 shadow-sm">
-                <img src={images.collageBg} alt="MKT Background Texture" class="w-full h-full object-cover grayscale-[0.2]" />
+              <div class="hidden lg:block absolute -left-10 top-0 w-[100%] h-full overflow-hidden z-0 bg-gray-100 shadow-sm rounded-lg">
+                <img src={images.collageBg} alt="Textura de fondo marketing" class="w-full h-full object-cover grayscale-[0.2]" loading="lazy" />
               </div>
               
-              <div class="absolute top-[10%] right-0 w-[55%] aspect-square bg-gray-200 z-10 rotate-[5deg] overflow-hidden transition-transform duration-500 hover:rotate-0 shadow-xl">
-                <img src={images.collagePic1} alt="Marketing Pic 1" class="w-full h-full object-cover" />
+              <div class="img-floating-card top-[5%] lg:top-[10%] right-0 w-[55%] rotate-[5deg] z-10 hover:rotate-0">
+                <img src={images.collagePic1} alt="Producción de contenido digital" class="w-full h-full object-cover" loading="lazy" />
               </div>
               
-              <div class="absolute bottom-[10%] left-[20%] w-[75%] aspect-square bg-gray-200 z-20 rotate-[-4deg] overflow-hidden transition-transform duration-500 hover:rotate-0 shadow-xl">
-                <img src={images.collagePic2} alt="Marketing Pic 2" class="w-full h-full object-cover" />
+              <div class="img-floating-card bottom-[5%] lg:bottom-[10%] left-[10%] lg:left-[20%] w-[75%] rotate-[-4deg] z-20 hover:rotate-0">
+                <img src={images.collagePic2} alt="Gestión de campañas publicitarias" class="w-full h-full object-cover" loading="lazy" />
               </div>
             </div>
           </aside>
@@ -129,6 +138,7 @@ const servicios = [
 </Layout>
 
 <style is:global>
+  /** 1. TIPOGRAFÍA **/
   @font-face {
     font-family: 'Avenir Book';
     src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
@@ -140,12 +150,62 @@ const servicios = [
     font-weight: 900; font-style: normal; font-display: swap;
   }
 
+  :root {
+      --purple-accent: #7C07A6;
+  }
+
   .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
   .font-avenir-black { font-family: 'Avenir Black', sans-serif; font-weight: 900; }
-  
+  .text-purple-accent { color: #7C07A6; }
+  .bg-purple-accent { background-color: #7C07A6; }
+
+  /** 2. UTILIDADES DE SELECCIÓN **/
+  ::selection {
+      background-color: #7C07A6;
+      color: #ffffff;
+  }
+
+  /** 3. BOTONES Y COMPONENTES **/
+  .btn-primary {
+      display: inline-block;
+      background-color: #7C07A6;
+      color: #ffffff;
+      padding: 0.75rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-family: 'Avenir Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      text-decoration: none;
+  }
+  .btn-primary:hover {
+      background-color: #5a2484;
+      transform: scale(1.05);
+  }
+
+  .img-floating-card {
+      position: absolute;
+      aspect-ratio: 1 / 1;
+      background-color: #e5e7eb;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 4px solid #ffffff;
+  }
+
+  /** 4. ANIMACIONES **/
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0) rotate(-2deg); }
     50% { transform: translateY(-15px) rotate(3deg); }
   }
   .animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+
+  /** 5. AJUSTES RESPONSIVOS ADICIONALES **/
+  @media (max-width: 1024px) {
+      .img-floating-card {
+          border-width: 2px;
+      }
+  }
 </style>
