@@ -8,10 +8,10 @@ import WhatsAppFloater from '../components/WhatsAppFloater.astro';
 interface Props {
     title: string;
     description: string;
-    image?: string; // Añadimos la prop de imagen como opcional
+    image?: string; 
 }
 
-const { title, description, image = '/images/LOGO.webp' } = Astro.props; // Imagen por defecto si no hay una
+const { title, description, image = '/images/LOGO.webp' } = Astro.props; 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -26,6 +26,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2JJVE75F3" is:inline></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H2JJVE75F3');
+
+          // Necesario para que GA detecte cambios de página con ClientRouter
+          document.addEventListener('astro:page-load', () => {
+            gtag('config', 'G-H2JJVE75F3', {
+              page_path: window.location.pathname,
+            });
+          });
+        </script>
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalURL} />

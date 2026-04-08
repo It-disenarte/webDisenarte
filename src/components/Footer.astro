@@ -1,16 +1,15 @@
 ---
 /**
  * src/components/Footer.astro
- * Footer actualizado con colores corporativos: Morado (#7C07A6) y Gris (#E6E7E8).
- * Ajustes: Logo blanco más grande y centrado, iconos de redes sociales ampliados.
+ * Footer actualizado: 3 columnas perfectamente equilibradas y centradas.
  */
 ---
 
 <footer class="bg-[#7C07A6] text-white py-16 border-t border-white/10" role="contentinfo">
   <div class="container mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
       
-      <div class="flex items-center justify-center md:justify-start h-full">
+      <div class="flex items-center justify-center">
         <a href="/" class="hover:opacity-80 transition-opacity" title="Volver al inicio">
           <img 
             src="/images/assets/LOGO-BLANCO.webp" 
@@ -23,7 +22,7 @@
 
       <div class="footer-column-border">
         <div class="flex flex-col space-y-4">
-          <h3 class="footer-title">PUBLICIDAD</h3>
+          <h3 class="footer-title">CONTACTO</h3>
           
           <div class="contact-item">
             <img src="/images/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
@@ -31,8 +30,8 @@
           </div>
           
           <div class="contact-item">
-            <img src="/images/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
-            <a href="tel:4271004183" class="contact-link">427 100 41 83</a>
+            <img src="/images/assets/whatsappb.webp" alt="" class="contact-icon" aria-hidden="true" />
+            <a href="https://wa.me/524271004183" target="_blank" rel="noopener noreferrer" class="contact-link">427 100 41 83</a>
           </div>
           
           <div class="contact-item">
@@ -46,33 +45,6 @@
               Av. Lomas del Pedregoso #371<br />
               Col. Lomas de San Juan, Sección Campestre.<br />
               San Juan del Rio, Querétaro.
-            </address>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-column-border">
-        <div class="flex flex-col space-y-4">
-          <div class="mb-2">
-            <span class="block text-lg font-light tracking-widest leading-tight uppercase">Marketing</span>
-            <span class="block text-lg font-bold tracking-widest uppercase leading-tight">Digital</span>
-          </div>
-          
-          <div class="contact-item">
-            <img src="/images/assets/ICON-TELEFONO.webp" alt="" class="contact-icon" aria-hidden="true" />
-            <a href="tel:4273459183" class="contact-link">427 345 91 83</a>
-          </div>
-          
-          <div class="contact-item">
-            <img src="/images/assets/ICON-CORREO.webp" alt="" class="contact-icon" aria-hidden="true" />
-            <a href="mailto:marketing@disenarte-mexico.org" class="contact-link">marketing@disenarte-mexico.org</a>
-          </div>
-
-          <div class="flex items-start space-x-3 mt-4">
-            <img src="/images/assets/ICON-UBI.webp" alt="" class="contact-icon mt-1" aria-hidden="true" />
-            <address class="footer-address">
-              Av. Mármol #5. Col. El Pedregal,<br />
-              San Juan del Río, Querétaro.
             </address>
           </div>
         </div>
@@ -117,8 +89,8 @@
     --brand-gray: #E6E7E8;
   }
 
+  /* El borde solo aparece en escritorio para separar las 3 columnas equitativas */
   .footer-column-border {
-    /* Borde en gris corporativo #E6E7E8 */
     border-left-width: 0;
     padding-left: 0;
   }
@@ -127,7 +99,7 @@
     .footer-column-border {
       border-left-width: 1px;
       border-color: rgba(230, 231, 232, 0.2);
-      padding-left: 2.5rem;
+      padding-left: 3rem; /* Aumentado para dar aire a las 3 columnas */
     }
   }
 
