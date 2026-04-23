@@ -4,6 +4,8 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloater from '../components/WhatsAppFloater.astro';
+// 1. Importación del nuevo componente (Asegúrate de que el nombre del archivo coincida)
+import ChatFlotante from '../components/ChatFlotante.astro';
 
 interface Props {
     title: string;
@@ -32,10 +34,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-H2JJVE75F3');
 
-          // Necesario para que GA detecte cambios de página con ClientRouter
           document.addEventListener('astro:page-load', () => {
             gtag('config', 'G-H2JJVE75F3', {
               page_path: window.location.pathname,
@@ -43,6 +43,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           });
         </script>
 
+        <script is:inline>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2039038839979376');
+        fbq('track', 'PageView');
+
+        // Registro de PageView para ClientRouter
+        document.addEventListener('astro:page-load', () => {
+          fbq('track', 'PageView');
+        });
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=2039038839979376&ev=PageView&noscript=1"
+        /></noscript>
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:title" content={title} />
@@ -87,6 +107,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="whatsapp-wrapper">
             <WhatsAppFloater />
         </div>
+
+        <ChatFlotante />
 
         <script is:inline>
             document.addEventListener('astro:before-preparation', (event) => {

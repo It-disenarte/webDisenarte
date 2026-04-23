@@ -1,0 +1,161 @@
+<div id="chat-container">
+  <button id="btn-abrir">💬</button>
+  
+  <div id="ventana-chat" class="oculto">
+    <div id="cabecera">Asistente Diseñarte MX</div>
+    <div id="historial"></div>
+    <div id="controles">
+      <input type="text" id="input-msj" placeholder="Escribe aquí..." />
+      <button id="btn-enviar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Ajustado para estar arriba de WhatsApp (bottom: 90px) */
+  #chat-container { 
+    position: fixed; 
+    bottom: 90px; 
+    right: 20px; 
+    z-index: 99999; 
+    font-family: sans-serif; 
+  }
+
+  #btn-abrir { 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    background: #000; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 24px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  #btn-abrir:hover { transform: scale(1.1); }
+
+  #ventana-chat { 
+    width: 320px; 
+    height: 450px; 
+    background: white; 
+    border: 1px solid #eee; 
+    position: absolute; 
+    bottom: 75px; 
+    right: 0; 
+    display: flex; 
+    flex-direction: column; 
+    border-radius: 15px; 
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15); 
+    overflow: hidden;
+  }
+
+  .oculto { display: none !important; }
+
+  #cabecera { 
+    background: #000; 
+    color: white; 
+    padding: 15px; 
+    font-weight: bold; 
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #historial { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 15px; 
+    font-size: 14px; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+  }
+
+  #controles { 
+    display: flex; 
+    padding: 10px; 
+    background: white;
+    border-top: 1px solid #eee;
+  }
+
+  #input-msj { 
+    flex: 1; 
+    border: 1px solid #ddd; 
+    border-radius: 20px; 
+    padding: 8px 15px; 
+    outline: none; 
+    font-size: 14px;
+  }
+
+  #btn-enviar { 
+    background: none; 
+    border: none; 
+    color: #000; 
+    margin-left: 5px; 
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+  }
+
+  /* Estilos de burbujas de chat */
+  .msg-user { align-self: flex-end; background: #000; color: white; padding: 8px 12px; border-radius: 15px 15px 0 15px; max-width: 80%; }
+  .msg-bot { align-self: flex-start; background: #eee; color: #333; padding: 8px 12px; border-radius: 15px 15px 15px 0; max-width: 80%; }
+</style>
+
+<script>
+  const btnAbrir = document.getElementById('btn-abrir');
+  const ventana = document.getElementById('ventana-chat');
+  const btnEnviar = document.getElementById('btn-enviar');
+  const input = document.getElementById('input-msj') as HTMLInputElement;
+  const historial = document.getElementById('historial');
+
+  // Generar un ID de sesión para evitar el error de memoria en n8n
+  const sId = "session-" + Math.random().toString(36).substring(7);
+
+  if (btnAbrir && ventana) {
+    btnAbrir.onclick = () => ventana.classList.toggle('oculto');
+  }
+
+  async function enviarMensaje() {
+    if (!input || !historial) return;
+    
+    const texto = input.value;
+    if(!texto) return;
+
+    // Mensaje del usuario
+    historial.innerHTML += `<div class="msg-user">${texto}</div>`;
+    input.value = '';
+    historial.scrollTop = historial.scrollHeight;
+
+    try {
+      const res = await fetch('https://luismoises.app.n8n.cloud/webhook/chat-bot-web', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ 
+          chatInput: texto,
+          sessionId: sId 
+        })
+      });
+      
+      const data = await res.json();
+      const botResponse = data.output || "Lo siento, tuve un problema al procesar eso.";
+      
+      historial.innerHTML += `<div class="msg-bot">${botResponse}</div>`;
+    } catch (e) {
+      historial.innerHTML += `<div class="msg-bot">Error de conexión con el asistente.</div>`;
+    }
+    
+    historial.scrollTop = historial.scrollHeight;
+  }
+
+  if (btnEnviar) btnEnviar.onclick = enviarMensaje;
+
+  // Enviar con la tecla Enter
+  input?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') enviarMensaje();
+  });
+</script>
