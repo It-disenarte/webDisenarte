@@ -4,6 +4,12 @@
   <div id="ventana-chat" class="oculto">
     <div id="cabecera">Asistente Diseñarte MX</div>
     <div id="historial"></div>
+    <div id="typing-indicator" class="typing oculto">
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+      <span>Asistente está escribiendo...</span>
+    </div>
     <div id="controles">
       <input type="text" id="input-msj" placeholder="Escribe aquí..." />
       <button id="btn-enviar">
@@ -14,148 +20,109 @@
 </div>
 
 <style>
-  /* Ajustado para estar arriba de WhatsApp (bottom: 90px) */
-  #chat-container { 
-    position: fixed; 
-    bottom: 90px; 
-    right: 20px; 
-    z-index: 99999; 
-    font-family: sans-serif; 
-  }
-
-  #btn-abrir { 
-    width: 60px; 
-    height: 60px; 
-    border-radius: 50%; 
-    background: #000; 
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-    font-size: 24px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: transform 0.2s;
-  }
-
+  #chat-container { position: fixed; bottom: 24px; left: 20px; z-index: 99999; font-family: sans-serif; }
+  #btn-abrir { width: 60px; height: 60px; border-radius: 50%; background: #5a2484; color: white; border: none; cursor: pointer; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s; }
   #btn-abrir:hover { transform: scale(1.1); }
+  #ventana-chat { width: 340px; height: 500px; background: white; border: 1px solid #eee; position: absolute; bottom: 75px; left: 0; display: flex; flex-direction: column; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); overflow: hidden; transition: all 0.3s ease-out; }
+  .oculto { opacity: 0 !important; transform: translateY(10px) !important; pointer-events: none !important; }
+  #cabecera { background: #5a2484; color: white; padding: 15px; font-weight: bold; font-size: 14px; text-align: center; }
+  #historial { flex: 1; overflow-y: auto; padding: 15px; font-size: 14px; display: flex; flex-direction: column; gap: 12px; background: #f9f9f9; }
+  #controles { display: flex; padding: 10px; background: white; border-top: 1px solid #eee; }
+  #input-msj { flex: 1; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; outline: none; font-size: 14px; }
+  #btn-enviar { background: none; border: none; color: #5a2484; margin-left: 5px; cursor: pointer; display: flex; align-items: center; }
+  
+  .msg-user { align-self: flex-end; background: #000; color: white; padding: 10px 14px; border-radius: 15px 15px 0 15px; max-width: 85%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .msg-bot { align-self: flex-start; background: #f0e6ff; color: #333; padding: 10px 14px; border-radius: 15px 15px 15px 0; max-width: 85%; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+  .typing { display: flex; align-items: center; gap: 8px; padding: 10px 14px; margin: 0 15px 10px 15px; color: #5a2484; background: #f7f0ff; border-radius: 15px; font-size: 13px; }
+  .typing-dot { width: 8px; height: 8px; background: #5a2484; border-radius: 50%; animation: typing-blink 1.2s infinite ease-in-out; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing-blink { 0%, 80%, 100% { opacity: 0.3; } 40% { opacity: 1; } }
 
-  #ventana-chat { 
-    width: 320px; 
-    height: 450px; 
-    background: white; 
-    border: 1px solid #eee; 
-    position: absolute; 
-    bottom: 75px; 
-    right: 0; 
-    display: flex; 
-    flex-direction: column; 
-    border-radius: 15px; 
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15); 
-    overflow: hidden;
-  }
-
-  .oculto { display: none !important; }
-
-  #cabecera { 
-    background: #000; 
-    color: white; 
-    padding: 15px; 
-    font-weight: bold; 
-    font-size: 14px;
-    text-align: center;
-  }
-
-  #historial { 
-    flex: 1; 
-    overflow-y: auto; 
-    padding: 15px; 
-    font-size: 14px; 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: #f9f9f9;
-  }
-
-  #controles { 
-    display: flex; 
-    padding: 10px; 
-    background: white;
-    border-top: 1px solid #eee;
-  }
-
-  #input-msj { 
-    flex: 1; 
-    border: 1px solid #ddd; 
-    border-radius: 20px; 
-    padding: 8px 15px; 
-    outline: none; 
-    font-size: 14px;
-  }
-
-  #btn-enviar { 
-    background: none; 
-    border: none; 
-    color: #000; 
-    margin-left: 5px; 
-    cursor: pointer; 
-    display: flex;
-    align-items: center;
-  }
-
-  /* Estilos de burbujas de chat */
-  .msg-user { align-self: flex-end; background: #000; color: white; padding: 8px 12px; border-radius: 15px 15px 0 15px; max-width: 80%; }
-  .msg-bot { align-self: flex-start; background: #eee; color: #333; padding: 8px 12px; border-radius: 15px 15px 15px 0; max-width: 80%; }
+  /* --- ESTILOS PARA MARKDOWN --- */
+  .msg-bot :global(p) { margin-bottom: 8px; }
+  .msg-bot :global(p:last-child) { margin-bottom: 0; }
+  .msg-bot :global(ul), .msg-bot :global(ol) { margin-left: 18px; margin-bottom: 8px; }
+  .msg-bot :global(li) { margin-bottom: 4px; }
+  .msg-bot :global(table) { width: 100%; border-collapse: collapse; margin: 10px 0; background: white; border-radius: 8px; overflow: hidden; font-size: 12px; }
+  .msg-bot :global(th), .msg-bot :global(td) { border: 1px solid #ddd; padding: 6px; text-align: left; }
+  .msg-bot :global(th) { background: #5a2484; color: white; }
+  .msg-bot :global(strong) { color: #5a2484; }
 </style>
 
-<script>
-  const btnAbrir = document.getElementById('btn-abrir');
-  const ventana = document.getElementById('ventana-chat');
-  const btnEnviar = document.getElementById('btn-enviar');
-  const input = document.getElementById('input-msj') as HTMLInputElement;
-  const historial = document.getElementById('historial');
+<!-- Importamos Marked para procesar el texto de la IA -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  // Generar un ID de sesión para evitar el error de memoria en n8n
+<script>
+  // Generar ID de sesión que persista
   const sId = "session-" + Math.random().toString(36).substring(7);
 
-  if (btnAbrir && ventana) {
-    btnAbrir.onclick = () => ventana.classList.toggle('oculto');
-  }
+  function inicializarChat() {
+    const btnAbrir = document.getElementById('btn-abrir');
+    const ventana = document.getElementById('ventana-chat');
+    const btnEnviar = document.getElementById('btn-enviar');
+    const input = document.getElementById('input-msj') as HTMLInputElement;
+    const historial = document.getElementById('historial') as HTMLElement;
+    const typing = document.getElementById('typing-indicator') as HTMLElement;
 
-  async function enviarMensaje() {
-    if (!input || !historial) return;
-    
-    const texto = input.value;
-    if(!texto) return;
+    if (!btnAbrir || !ventana || !btnEnviar || !input || !historial || !typing) return;
 
-    // Mensaje del usuario
-    historial.innerHTML += `<div class="msg-user">${texto}</div>`;
-    input.value = '';
-    historial.scrollTop = historial.scrollHeight;
+    // Configurar marked para que los saltos de línea simples sean <br>
+    // @ts-ignore
+    marked.setOptions({ breaks: true });
 
-    try {
-      const res = await fetch('https://luismoises.app.n8n.cloud/webhook/chat-bot-web', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ 
-          chatInput: texto,
-          sessionId: sId 
-        })
-      });
-      
-      const data = await res.json();
-      const botResponse = data.output || "Lo siento, tuve un problema al procesar eso.";
-      
-      historial.innerHTML += `<div class="msg-bot">${botResponse}</div>`;
-    } catch (e) {
-      historial.innerHTML += `<div class="msg-bot">Error de conexión con el asistente.</div>`;
+    btnAbrir.onclick = () => {
+      ventana.classList.toggle('oculto');
+      if (!ventana.classList.contains('oculto') && historial.children.length === 0) {
+        // Mensaje inicial pulido
+        const saludo = "**Asistente:** ¡Hola! Soy tu asistente de **Diseñarte MX**. ¿En qué puedo ayudarte hoy?";
+        // @ts-ignore
+        historial.innerHTML += `<div class="msg-bot">${marked.parse(saludo)}</div>`;
+      }
+    };
+
+    async function enviarMensaje() {
+      // @ts-ignore
+      const texto = input.value.trim();
+      if(!texto) return;
+
+      historial.innerHTML += `<div class="msg-user"><strong>Tú:</strong> ${texto}</div>`;
+      // @ts-ignore
+      input.value = '';
+      typing.classList.remove('oculto');
+      historial.scrollTop = historial.scrollHeight;
+
+      try {
+        const res = await fetch('https://luismoises.app.n8n.cloud/webhook/chat-bot-web', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ 
+            chatInput: texto,
+            sessionId: sId 
+          })
+        });
+        
+        const data = await res.json();
+        const botResponse = data.output || "Lo siento, tuve un problema al procesar eso.";
+        
+        // PARSEAR MARKDOWN A HTML
+        // @ts-ignore
+        const htmlContent = marked.parse(botResponse);
+        historial.innerHTML += `<div class="msg-bot"><strong>Asistente:</strong> ${htmlContent}</div>`;
+
+      } catch (e) {
+        historial.innerHTML += `<div class="msg-bot">Error de conexión con el asistente.</div>`;
+      } finally {
+        typing.classList.add('oculto');
+      }
+      historial.scrollTop = historial.scrollHeight;
     }
-    
-    historial.scrollTop = historial.scrollHeight;
+
+    btnEnviar.onclick = enviarMensaje;
+    input.onkeypress = (e) => {
+      if (e.key === 'Enter') enviarMensaje();
+    };
   }
 
-  if (btnEnviar) btnEnviar.onclick = enviarMensaje;
-
-  // Enviar con la tecla Enter
-  input?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') enviarMensaje();
-  });
+  document.addEventListener('astro:page-load', inicializarChat);
 </script>
