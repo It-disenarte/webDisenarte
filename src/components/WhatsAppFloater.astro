@@ -125,3 +125,16 @@
     will-change: opacity, transform;
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnB2B = document.getElementById('btn-whatsapp-b2b');
+    if (btnB2B) {
+      btnB2B.addEventListener('click', () => {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-16751651845/z_IpCOXx7LgcEIXY57M-'
+        });
+      });
+    }
+  });
+</script>
