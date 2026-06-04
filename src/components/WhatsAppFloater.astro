@@ -72,6 +72,13 @@
       const isHidden = card.classList.contains('hidden');
       
       if (isHidden) {
+        // Disparar evento de conversión en Google Ads
+        if (window.gtag) {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16751651845/z_IpCOXx7LgcEIXY57M-'
+          });
+        }
+        
         // Mostramos la tarjeta
         card.classList.remove('hidden');
         // Pequeño delay para que la transición de CSS se note
@@ -125,16 +132,3 @@
     will-change: opacity, transform;
   }
 </style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btnB2B = document.getElementById('btn-whatsapp-b2b');
-    if (btnB2B) {
-      btnB2B.addEventListener('click', () => {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16751651845/z_IpCOXx7LgcEIXY57M-'
-        });
-      });
-    }
-  });
-</script>
