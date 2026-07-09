@@ -1,318 +1,709 @@
 ---
 /**
+
  * PÁGINA PRINCIPAL - Diseñarte México
+
  * Arquitectura: Astro + Tailwind CSS
+
  * Optimización: SEO Semántico, Carga Diferida (Lazy Load) y Persistencia de UI
+
  */
 
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 // --- CONFIGURACIÓN DE SEO ---
+
 const seoTitle = "Diseñarte México | Comunicación Visual y Marketing Digital";
-const seoDescription = "Diseño y estrategia al servicio de tu marca. Más de 20 años de experiencia impulsando el sector industrial con soluciones de marketing, publicidad y diseño.";
+
+const seoDescription =
+  "Diseño y estrategia al servicio de tu marca. Más de 20 años de experiencia impulsando el sector industrial con soluciones de marketing, publicidad y diseño.";
 
 // --- ACTIVOS (ASSETS) ---
+
 const images = [
-  "/images/assets/A.webp", "/images/assets/B.webp", "/images/assets/C.webp", "/images/assets/D.webp", 
-  "/images/assets/E.webp", "/images/assets/F.webp", "/images/assets/G.webp", "/images/assets/H.webp", 
-  "/images/assets/I.webp", "/images/assets/J.webp", "/images/assets/K.webp"
+  "/images/assets/A.webp",
+  "/images/assets/B.webp",
+  "/images/assets/C.webp",
+  "/images/assets/D.webp",
+
+  "/images/assets/E.webp",
+  "/images/assets/F.webp",
+  "/images/assets/G.webp",
+  "/images/assets/H.webp",
+
+  "/images/assets/I.webp",
+  "/images/assets/J.webp",
+  "/images/assets/K.webp",
 ];
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  
   <main class="relative bg-white overflow-x-hidden">
-
-    <section class="relative min-h-[90vh] flex items-center justify-center px-4 py-12 md:py-20 overflow-hidden" aria-labelledby="hero-title">
-      
-      <div class="lava-wrapper pointer-events-none" transition:persist="lava-bg">
-        <div id="lava-container" class="gooey-container opacity-50" aria-hidden="true"></div>
+    <div
+      class="lava-wrapper pointer-events-none absolute top-0 left-0 w-full h-[210vh] z-10 overflow-hidden"
+      transition:persist="lava-bg"
+    >
+      <div
+        id="lava-container"
+        class="gooey-container opacity-50 w-full h-full relative"
+        aria-hidden="true"
+      >
       </div>
+    </div>
 
-      <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-white via-white/90 to-transparent z-[1] pointer-events-none"></div>
-
-      <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-        
+    <section
+      class="relative min-h-[90vh] flex items-center justify-center px-4 py-12 md:py-20 overflow-visible"
+      aria-labelledby="hero-title"
+    >
+      <div
+        class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-20"
+      >
         <div class="flex flex-col items-center lg:items-start">
           <header class="canvas-container reveal">
             <div class="canvas" id="hero-title">
-                <div class="line">
-                  <span class="quote" aria-hidden="true">“</span>
-                  <h1 class="font-walkway thin"><span class="capitalize">D</span>iseño &</h1>
-                </div>
-                <div class="line">
-                  <span class="font-eastman bold">estrategia</span>
-                </div>
-                <div class="line indent">
-                  <span class="font-walkway thin">al servicio</span>
-                </div>
-                <div class="line last-row">
-                  <span class="font-eastman bold">de tu marca</span>
-                  <span class="quote" aria-hidden="true">”</span>
-                </div>
+              <div class="line">
+                <span class="quote" aria-hidden="true">“</span>
+
+                <h1 class="font-walkway thin">
+                  <span class="capitalize">D</span>iseño &
+                </h1>
+              </div>
+
+              <div class="line">
+                <span class="font-eastman bold">estrategia</span>
+              </div>
+
+              <div class="line indent">
+                <span class="font-walkway thin">al servicio</span>
+              </div>
+
+              <div class="line last-row">
+                <span class="font-eastman bold">de tu marca</span>
+
+                <span class="quote" aria-hidden="true">”</span>
+              </div>
             </div>
           </header>
-          
-          <div class="mt-8 lg:ml-10 flex flex-col items-center lg:items-start space-y-8 text-center lg:text-left font-avenir reveal delay-1">
+
+          <div
+            class="mt-8 lg:ml-10 flex flex-col items-center lg:items-start space-y-8 text-center lg:text-left font-avenir reveal delay-1"
+          >
             <p class="text-gray-700 text-lg md:text-xl max-w-md leading-tight">
-              En <strong class="font-medium text-[#1a1a1a]">Diseñarte México</strong> impulsamos la comunicación visual del sector industrial con soluciones de marketing, diseño y publicidad, respaldadas por más de <span class="font-medium text-[#1a1a1a]">20 años de experiencia.</span>
+              En <strong class="font-medium text-[#1a1a1a]"
+                >Diseñarte México</strong
+              > impulsamos la comunicación visual del sector industrial con soluciones
+              de marketing, diseño y publicidad, respaldadas por más de <span
+                class="font-medium text-[#1a1a1a]">20 años de experiencia.</span
+              >
             </p>
-            <a href="/contacto" class="btn-cta-main">
-              Contáctanos
-            </a>
+
+            <a href="/contacto" class="btn-cta-main"> Contáctanos </a>
           </div>
         </div>
 
         <div class="w-full relative lg:mt-0 mt-8 reveal delay-2">
           <div class="video-card-wrapper">
-            <iframe 
+            <iframe
               src="https://www.youtube.com/embed/HpwOct-28e8?si=VwjoiBbmUUIxv0-q"
-              title="Presentación corporativa Diseñarte México" 
-              class="w-full h-full" 
+              title="Presentación corporativa Diseñarte México"
+              class="w-full h-full"
               allowfullscreen
-              loading="lazy"
-            ></iframe>
+              loading="lazy"></iframe>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-white py-20 md:py-32 px-4 relative z-20" aria-labelledby="services-heading">
+    <section
+      class="bg-transparent py-20 md:py-32 px-4 relative z-20"
+      aria-labelledby="services-heading"
+    >
       <div class="max-w-7xl mx-auto font-avenir">
-        
         <header class="text-center mb-20 reveal">
-          <h2 id="services-heading" class="text-3xl md:text-5xl tracking-tight text-[#1a1a1a] font-book">
-            “<span class="text-purple-accent font-medium">Publicidad</span> que conecta, <span class="text-purple-accent font-medium">marketing</span> que convierte”
+          <h2
+            id="services-heading"
+            class="text-3xl md:text-5xl tracking-tight text-[#1a1a1a] font-book"
+          >
+            “<span class="text-purple-accent font-medium">Publicidad</span> que conecta,
+            <span class="text-purple-accent font-medium">marketing</span> que convierte”
           </h2>
+
           <div class="h-1 w-24 bg-purple-accent mx-auto mt-6"></div>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
           <article class="service-card reveal delay-1">
             <div class="image-container">
-              <img src="/images/assets/PUBLICIDAD.webp" alt="Soluciones de publicidad industrial y comunicación de marca" class="service-img" loading="lazy" />
+              <img
+                src="/images/assets/PUBLICIDAD.png"
+                alt="Soluciones de publicidad industrial y comunicación de marca"
+                class="service-img"
+                loading="lazy"
+              />
             </div>
+
             <p class="service-description">
-              Diseñamos soluciones publicitarias integrales que <strong class="font-medium">optimizan la comunicación</strong> de tu marca y potencian su posicionamiento en el mercado.
+              Diseñamos soluciones publicitarias integrales que <strong
+                class="font-medium">optimizan la comunicación</strong
+              > de tu marca y potencian su posicionamiento en el mercado.
             </p>
-            <a href="/publicidad" class="btn-plus" aria-label="Conoce más sobre nuestros servicios de publicidad">
-              <div class="plus-box" aria-hidden="true">+</div><span class="btn-text">conoce más</span>
+
+            <a
+              href="/publicidad"
+              class="btn-plus"
+              aria-label="Conoce más sobre nuestros servicios de publicidad"
+            >
+              <div class="plus-box" aria-hidden="true">+</div><span
+                class="btn-text">conoce más</span
+              >
             </a>
           </article>
 
           <article class="service-card reveal delay-2">
             <div class="image-container">
-              <img src="/images/assets/MKT.webp" alt="Estrategias de marketing digital para empresas industriales" class="service-img" loading="lazy" />
+              <img
+                src="/images/assets/MKT.png"
+                alt="Estrategias de marketing digital para empresas industriales"
+                class="service-img"
+                loading="lazy"
+              />
             </div>
+
             <p class="service-description">
-              Desarrollamos estrategias de marketing digital orientadas a <strong class="font-medium">fortalecer la presencia</strong> de tu marca y generar resultados medibles.
+              Desarrollamos estrategias de marketing digital orientadas a <strong
+                class="font-medium">fortalecer la presencia</strong
+              > de tu marca y generar resultados medibles.
             </p>
-            <a href="/marketing" class="btn-plus" aria-label="Conoce más sobre nuestros servicios de marketing">
-              <div class="plus-box" aria-hidden="true">+</div><span class="btn-text">conoce más</span>
+
+            <a
+              href="/marketing"
+              class="btn-plus"
+              aria-label="Conoce más sobre nuestros servicios de marketing"
+            >
+              <div class="plus-box" aria-hidden="true">+</div><span
+                class="btn-text">conoce más</span
+              >
             </a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="bg-white pb-32 overflow-hidden relative z-20 reveal">
+    <section class="bg-white pb-32 overflow-hidden relative z-30 reveal">
       <div class="marquee-wrapper">
         <div class="flex animate-marquee whitespace-nowrap items-center">
-          {[...images, ...images].map((src) => (
-            <div class="client-logo-item">
-              <img src={src} alt="Logotipo de empresa cliente de Diseñarte México" loading="lazy" class="max-w-full h-auto" />
-            </div>
-          ))}
+          {
+            [...images, ...images].map((src) => (
+              <div class="client-logo-item">
+                <img
+                  src={src}
+                  alt="Logotipo de empresa cliente de Diseñarte México"
+                  loading="lazy"
+                  class="max-w-full h-auto"
+                />
+              </div>
+            ))
+          }
         </div>
       </div>
 
-      <div class="max-w-5xl mx-auto text-center px-4 mt-20 font-avenir reveal delay-1">
-        <h3 class="text-2xl md:text-4xl tracking-tight text-[#1a1a1a] font-book">
-          “Conviértete en una de las empresas que han <span class="text-purple-accent font-medium">maximizado su impacto y crecimiento</span>”
+      <div
+        class="max-w-5xl mx-auto text-center px-4 mt-20 font-avenir reveal delay-1"
+      >
+        <h3
+          class="text-2xl md:text-4xl tracking-tight text-[#1a1a1a] font-book"
+        >
+          “Conviértete en una de las empresas que han <span
+            class="text-purple-accent font-medium"
+            >maximizado su impacto y crecimiento</span
+          >”
         </h3>
       </div>
     </section>
-
   </main>
 </Layout>
 
 <style is:global>
-  /** * 1. CONFIGURACIÓN DE TIPOGRAFÍA (Mantenida idéntica)
-   */
+  /** * 1. CONFIGURACIÓN DE TIPOGRAFÍA */
+
   @font-face {
-    font-family: 'Eastman Grotesque Black';
-    src: url('/fonts/Eastman-Grotesque-Black-trial.otf') format('opentype');
-    font-weight: 900; font-display: swap;
-  }
-  @font-face {
-    font-family: 'Walkway UltraBold';
-    src: url('/fonts/Walkway_UltraBold.ttf') format('truetype');
-    font-weight: 800; font-display: swap;
-  }
-  @font-face {
-    font-family: 'Avenir LT Std';
-    src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
-    font-weight: 400; font-display: swap;
-  }
-  @font-face {
-    font-family: 'Avenir LT Std';
-    src: url('/fonts/avenir-lt-std-65-medium.otf') format('opentype');
-    font-weight: 500; font-display: swap;
+    font-family: "Eastman Grotesque Black";
+
+    src: url("/fonts/Eastman-Grotesque-Black-trial.otf") format("opentype");
+
+    font-weight: 900;
+    font-display: swap;
   }
 
-  /** * 2. SISTEMA DE DISEÑO (VARIABLES)
-   */
-  :root { 
-    --purple-main: #7C07A6; 
-    --gray-main: #E6E7E8;
-    --zoom: 5.5rem; 
-    --font-eastman: 'Eastman Grotesque Black', sans-serif;
-    --font-walkway: 'Walkway UltraBold', sans-serif;
-    --font-avenir: 'Avenir LT Std', sans-serif;
+  @font-face {
+    font-family: "Walkway UltraBold";
+
+    src: url("/fonts/Walkway_UltraBold.ttf") format("truetype");
+
+    font-weight: 800;
+    font-display: swap;
   }
 
-  /** * 3. ESTILOS BASE Y UTILIDADES
-   */
-  body { background-color: white; color: #1a1a1a; margin: 0; }
-  .font-eastman { font-family: var(--font-eastman); }
-  .font-walkway { font-family: var(--font-walkway); }
-  .font-avenir { font-family: var(--font-avenir); }
-  .font-book { font-weight: 400; }
-  .font-medium { font-weight: 500; }
-  .text-purple-accent { color: var(--purple-main); }
-  .bg-purple-accent { background-color: var(--purple-main); }
+  @font-face {
+    font-family: "Avenir LT Std";
 
-  /** * 4. COMPONENTES: HERO & LAVA
-   */
-  .lava-wrapper { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-  .gooey-container { width: 100%; height: 100%; background: white; filter: contrast(20) brightness(1.1); transform: translateZ(0); }
-  .grumo { position: absolute; filter: blur(25px); border-radius: 50%; will-change: left, top; mix-blend-mode: multiply; }
+    src: url("/fonts/avenir-lt-std-45-book.otf") format("opentype");
 
-  .canvas { font-size: var(--zoom); transform: rotate(-2deg); line-height: 0.82; padding: 20px; }
-  .line { display: flex; align-items: center; white-space: nowrap; }
-  .quote { font-family: var(--font-eastman); color: var(--purple-main); font-size: 1.1em; font-weight: 900; }
-  .thin { font-size: 0.65em; letter-spacing: -0.02em; text-transform: lowercase; color: #1a1a1a; }
-  .bold { font-size: 1.25em; text-transform: lowercase; letter-spacing: -0.05em; }
-  .indent { margin-left: 1.6em; }
-  .capitalize { text-transform: uppercase; }
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Avenir LT Std";
+
+    src: url("/fonts/avenir-lt-std-65-medium.otf") format("opentype");
+
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  /** * 2. SISTEMA DE DISEÑO (VARIABLES) */
+
+  :root {
+    --purple-main: #7c07a6;
+
+    --gray-main: #e6e7e8;
+
+    --zoom: 5.5rem;
+
+    --font-eastman: "Eastman Grotesque Black", sans-serif;
+
+    --font-walkway: "Walkway UltraBold", sans-serif;
+
+    --font-avenir: "Avenir LT Std", sans-serif;
+  }
+
+  /** * 3. ESTILOS BASE Y UTILIDADES */
+
+  body {
+    background-color: white;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .font-eastman {
+    font-family: var(--font-eastman);
+  }
+
+  .font-walkway {
+    font-family: var(--font-walkway);
+  }
+
+  .font-avenir {
+    font-family: var(--font-avenir);
+  }
+
+  .font-book {
+    font-weight: 400;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .text-purple-accent {
+    color: var(--purple-main);
+  }
+
+  .bg-purple-accent {
+    background-color: var(--purple-main);
+  }
+
+  /** * 4. COMPONENTES: HERO & LAVA */
+
+  .lava-wrapper {
+    position: absolute;
+  }
+
+  .gooey-container {
+    background: white;
+    filter: contrast(20) brightness(1.1);
+    transform: translateZ(0);
+    transition: opacity 0.2s ease-out;
+  }
+
+  .grumo {
+    position: absolute;
+
+    filter: blur(25px);
+
+    border-radius: 50%;
+
+    will-change: left, top, transform;
+
+    mix-blend-mode: multiply;
+
+    transition: transform 0.15s ease-out;
+  }
+
+  .canvas {
+    font-size: var(--zoom);
+    transform: rotate(-2deg);
+    line-height: 0.82;
+    padding: 20px;
+  }
+
+  .line {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .quote {
+    font-family: var(--font-eastman);
+    color: var(--purple-main);
+    font-size: 1.1em;
+    font-weight: 900;
+  }
+
+  .thin {
+    font-size: 0.65em;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: #1a1a1a;
+  }
+
+  .bold {
+    font-size: 1.25em;
+    text-transform: lowercase;
+    letter-spacing: -0.05em;
+  }
+
+  .indent {
+    margin-left: 1.6em;
+  }
+
+  .capitalize {
+    text-transform: uppercase;
+  }
 
   .btn-cta-main {
     display: inline-block;
-    background-color: #7C07A6;
+
+    background-color: #7c07a6;
+
     color: #ffffff;
+
     padding: 1rem 4rem;
+
     border-radius: 9999px;
+
     font-weight: 500;
+
     font-size: 1.125rem;
+
     transition-property: all;
+
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
     transition-duration: 300ms;
+
     text-transform: uppercase;
+
     letter-spacing: 0.1em;
+
     text-align: center;
   }
+
   .btn-cta-main:hover {
     opacity: 0.9;
+
     transform: translateY(-0.25rem);
+
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .video-card-wrapper {
     position: relative;
+
     aspect-ratio: 16 / 9;
-    background-color: #E6E7E8;
+
+    background-color: #e6e7e8;
+
     border-radius: 1rem;
+
     overflow: hidden;
+
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid #E6E7E8;
+
+    border: 1px solid #e6e7e8;
   }
 
-  /** * 5. COMPONENTES: SERVICIOS
-   */
-  .service-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem; height: 100%; }
-  .image-container { width: 100%; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .service-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.7s; }
-  .service-card:hover .service-img { transform: scale(1.05); }
-  .service-description { font-size: 1.25rem; font-weight: 400; line-height: 1.25; max-width: 28rem; flex-grow: 1; color: #1f2937; }
-  @media (min-width: 768px) { .service-description { font-size: 1.5rem; } }
+  /** * 5. COMPONENTES: SERVICIOS */
 
-  .btn-plus { 
-    display: flex; align-items: center; background-color: var(--gray-main); 
-    border-radius: 9999px; overflow: hidden; transition: 0.3s ease; 
-  }
-  .btn-plus:hover { background-color: #d1d5db; }
-  .plus-box { 
-    background-color: var(--purple-main); color: white; 
-    width: 50px; height: 50px; display: flex; 
-    justify-content: center; align-items: center; 
-    font-weight: 900; font-size: 1.5rem; 
-  }
-  .btn-text { 
-    padding: 0 35px; color: #374151; font-weight: 500; 
-    text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; 
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    height: 100%;
   }
 
-  /** * 6. COMPONENTES: MARQUEE (Logos)
-   */
-  .marquee-wrapper { position: relative; display: flex; border-top: 1px solid #E6E7E8; border-bottom: 1px solid #E6E7E8; padding: 3rem 0; background-color: rgba(230, 231, 232, 0.3); }
-  .client-logo-item { margin: 0 3rem; width: 8rem; flex-shrink: 0; filter: grayscale(100%); opacity: 0.4; transition: all 0.5s; }
-  @media (min-width: 768px) { .client-logo-item { width: 12rem; } }
-  .client-logo-item:hover { filter: grayscale(0%); opacity: 1; }
-  
-  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  .animate-marquee { animation: marquee 50s linear infinite; }
+  .image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 
-  /** * 7. RESPONSIVIDAD (Media Queries)
-   */
-  @media (max-width: 768px) { 
-    :root { --zoom: 3.2rem; } 
-    .indent { margin-left: 1rem; } 
-    .btn-plus { transform: scale(0.9); }
+  .service-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.7s;
+  }
+
+  .service-card:hover .service-img {
+    transform: scale(1.05);
+  }
+
+  .service-description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+    max-width: 28rem;
+    flex-grow: 1;
+    color: #1f2937;
+  }
+
+  @media (min-width: 768px) {
+    .service-description {
+      font-size: 1.5rem;
+    }
+  }
+
+  .btn-plus {
+    display: flex;
+    align-items: center;
+    background-color: var(--gray-main);
+
+    border-radius: 9999px;
+    overflow: hidden;
+    transition: 0.3s ease;
+  }
+
+  .btn-plus:hover {
+    background-color: #d1d5db;
+  }
+
+  .plus-box {
+    background-color: var(--purple-main);
+    color: white;
+
+    width: 50px;
+    height: 50px;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+
+  .btn-text {
+    padding: 0 35px;
+    color: #374151;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  /** * 6. COMPONENTES: MARQUEE (Logos) */
+
+  .marquee-wrapper {
+    position: relative;
+    display: flex;
+    border-top: 1px solid #e6e7e8;
+    border-bottom: 1px solid #e6e7e8;
+    padding: 3rem 0;
+    background-color: rgba(230, 231, 232, 0.3);
+  }
+
+  .client-logo-item {
+    margin: 0 3rem;
+    width: 8rem;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    opacity: 0.4;
+    transition: all 0.5s;
+  }
+
+  @media (min-width: 768px) {
+    .client-logo-item {
+      width: 12rem;
+    }
+  }
+
+  .client-logo-item:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 50s linear infinite;
+  }
+
+  /** * 7. RESPONSIVIDAD (Media Queries) */
+
+  @media (max-width: 768px) {
+    :root {
+      --zoom: 3.2rem;
+    }
+
+    .indent {
+      margin-left: 1rem;
+    }
+
+    .btn-plus {
+      transform: scale(0.9);
+    }
   }
 </style>
 
 <script>
-  /**
-   * LÓGICA DE ANIMACIÓN LAVA
-   * Optimizada para no duplicar elementos en navegación SPA (View Transitions)
-   */
-  const colors = ['#7C07A6', '#A607D9', '#530470', '#E6E7E8', '#C0C1C2'];
-  
+  const colors = ["#4f2060", "#cbbad6", "#cbbad6", "#cbbad6", "#C0C1C2"];
+
   function initLava() {
-    const container = document.getElementById('lava-container');
+    const container = document.getElementById("lava-container");
+
     if (!container || container.children.length > 0) return;
 
     const isMobile = window.innerWidth < 768;
-    const numGrumos = isMobile ? 8 : 22; 
-    const random = (min: number, max: number): number => Math.random() * (max - min) + min;
+
+    const numGrumos = isMobile ? 10 : 24;
+
+    const random = (min: number, max: number): number =>
+      Math.random() * (max - min) + min;
+
+    const grumosData: Array<{
+      el: HTMLElement;
+      sideFactor: number;
+      initLeft: number;
+      initTop: number;
+    }> = [];
 
     for (let i = 0; i < numGrumos; i++) {
-      const grumo = document.createElement('div');
-      grumo.classList.add('grumo');
-      const size = isMobile ? random(200, 400) : random(300, 650); 
-      grumo.style.width = grumo.style.height = `${size}px`;
-      grumo.style.background = colors[Math.floor(Math.random() * colors.length)];
-      grumo.style.left = `${random(-20, 110)}%`;
-      grumo.style.top = `${random(-20, 110)}%`;
-      container.appendChild(grumo);
-      
-      const animar = (el: HTMLElement) => {
-        const tx = random(-20, 110);
-        const ty = random(-20, 110);
-        const dur = isMobile ? random(12, 22) : random(8, 16);
+      const grumo = document.createElement("div");
 
-        el.animate([
-          { left: el.style.left, top: el.style.top },
-          { left: `${tx}%`, top: `${ty}%` }
-        ], { duration: dur * 1000, easing: 'ease-in-out' }).onfinish = () => {
+      grumo.classList.add("grumo");
+
+      const size = isMobile ? random(180, 280) : random(280, 520);
+
+      grumo.style.width = grumo.style.height = `${size}px`;
+
+      grumo.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+      const initialLeft = random(-5, 105);
+
+      const initialTop = random(-5, 65);
+
+      grumo.style.left = `${initialLeft}%`;
+
+      grumo.style.top = `${initialTop}%`;
+
+      container.appendChild(grumo);
+
+      const sideFactor = initialLeft < 50 ? -1 : 1;
+
+      grumosData.push({
+        el: grumo,
+        sideFactor,
+        initLeft: initialLeft,
+        initTop: initialTop,
+      });
+
+      const animar = (el: HTMLElement, itemIndex: number) => {
+        const tx = random(-5, 105);
+
+        const ty = random(-5, 65);
+
+        const dur = isMobile ? random(14, 24) : random(10, 18);
+
+        el.animate(
+          [
+            { left: el.style.left, top: el.style.top },
+
+            { left: `${tx}%`, top: `${ty}%` },
+          ],
+          { duration: dur * 1000, easing: "ease-in-out" },
+        ).onfinish = () => {
           el.style.left = `${tx}%`;
+
           el.style.top = `${ty}%`;
-          animar(el);
+
+          grumosData[itemIndex].initLeft = tx;
+
+          grumosData[itemIndex].initTop = ty;
+
+          animar(el, itemIndex);
         };
       };
-      animar(grumo);
+
+      animar(grumo, i);
     }
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      const viewportHeight = window.innerHeight;
+
+      const windowWidth = window.innerWidth;
+
+      // Calibración de rango de scroll
+
+      const progress = Math.min(scrollY / (viewportHeight * 1.1), 1);
+
+      // MODIFICACIÓN: Desvanecer gradualmente el contenedor principal a medida que se avanza en scroll
+
+      // Comienza en 0.5 (su opacidad original) y baja a 0 de forma lineal
+
+      const currentOpacity = 0.5 * (1 - progress);
+
+      container.style.opacity = currentOpacity.toString();
+
+      grumosData.forEach(({ el, sideFactor, initLeft, initTop }) => {
+        const targetX =
+          sideFactor === -1 ? -windowWidth * 0.12 : windowWidth * 0.88;
+
+        const targetY = viewportHeight * 1.55;
+
+        const currentInitX = (initLeft / 100) * windowWidth;
+
+        const currentInitY = (initTop / 100) * viewportHeight;
+
+        const moveX = (targetX - currentInitX) * progress;
+
+        const moveY = (targetY - currentInitY) * progress;
+
+        const currentScale = 1 - progress * 0.45;
+
+        el.style.transform = `translate(${moveX}px, ${moveY}px) scale(${currentScale})`;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
   }
 
-  document.addEventListener('astro:page-load', initLava);
+  document.addEventListener("astro:page-load", initLava);
 </script>

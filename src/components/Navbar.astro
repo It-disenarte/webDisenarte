@@ -6,7 +6,7 @@
 
 <nav 
   id="main-nav" 
-  class="fixed top-0 left-0 w-full z-[100000] bg-white/95 backdrop-blur-md border-b border-[#E6E7E8] h-20 shadow-sm transition-all duration-300"
+  class="fixed top-0 left-0 w-full z-[100000] border-b border-gray-200 h-20 shadow-sm transition-all duration-300 bg-white"
 >
   <div class="container mx-auto h-full px-6 flex justify-between items-center">
     
@@ -15,16 +15,16 @@
         id="nav-logo"
         src="/images/LOGO.webp" 
         alt="Logotipo" 
-        class="h-14 md:h-16 w-auto object-contain transition-all duration-300"
+        class="h-14 md:h-16 w-auto object-contain transition-all duration-300" 
       />
     </a>
 
     <div class="hidden lg:flex items-center space-x-8">
+      <a href="/" class="nav-link">Inicio</a>
       <a href="/nosotros" class="nav-link">Nosotros</a>
       <a href="/publicidad" class="nav-link">Publicidad</a>
       <a href="/marketing" class="nav-link">Marketing Digital</a>
       <a href="/contacto" class="nav-link">Contacto</a>
-      <a href="/blog" class="nav-link">Blog</a>
     </div>
 
     <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none z-[110000]">
@@ -38,11 +38,11 @@
     id="mobile-menu" 
     class="fixed top-0 right-0 h-screen w-full bg-white flex flex-col items-center justify-center space-y-8 text-2xl transform translate-x-full transition-transform duration-500 ease-in-out lg:hidden z-[105000]"
   >
+    <a href="/" class="mobile-link">Inicio</a>
     <a href="/nosotros" class="mobile-link">Nosotros</a>
     <a href="/publicidad" class="mobile-link">Publicidad</a>
     <a href="/marketing" class="mobile-link">Marketing Digital</a>
     <a href="/contacto" class="mobile-link">Contacto</a>
-    <a href="/blog" class="mobile-link">Blog</a>
   </div>
 </nav>
 
@@ -54,24 +54,23 @@
     }
 
     :root {
-        --brand-purple: #7C07A6;
-        --brand-gray: #E6E7E8;
+        --brand-purple: #A53692;
         --font-avenir: 'Avenir LT Std 65 Medium', sans-serif;
     }
 
     .nav-link {
         position: relative;
-        color: #374151;
+        color: #374151; /* Gris oscuro para leerse bien en blanco */
         font-family: var(--font-avenir);
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: color 0.3s;
+        transition: opacity 0.3s;
         padding: 0.5rem 0;
     }
 
-    .nav-link:hover { color: var(--brand-purple); }
+    .nav-link:hover { opacity: 0.7; }
     .nav-link::after {
         content: ''; position: absolute; left: 0; bottom: 0;
         width: 0; height: 2px; background-color: var(--brand-purple);
@@ -81,20 +80,15 @@
 
     .mobile-link {
         font-family: var(--font-avenir);
-        color: #1f2937;
+        color: #374151;
         font-weight: 500;
         transition: all 0.3s ease;
     }
+    .mobile-link:hover { color: var(--brand-purple); }
     
-    .open-menu .line-1 { transform: rotate(45deg) translate(5px, 6px); background-color: var(--brand-purple); }
+    .open-menu .line-1 { transform: rotate(45deg) translate(5px, 6px); background-color: #374151; }
     .open-menu .line-2 { opacity: 0; }
-    .open-menu .line-3 { transform: rotate(-45deg) translate(5px, -6px); background-color: var(--brand-purple); }
-
-    .nav-scrolled {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        height: 4.5rem;
-    }
+    .open-menu .line-3 { transform: rotate(-45deg) translate(5px, -6px); background-color: #374151; }
 </style>
 
 <script is:inline>

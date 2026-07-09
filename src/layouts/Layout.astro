@@ -77,7 +77,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
         <ClientRouter />
     </head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16751651845"></script>
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
@@ -108,7 +107,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             </div>
         </div>
 
-        <main class="pt-20 min-h-screen">
+        <main class="pt-20 min-h-screen content-wrapper">
             <slot /> 
         </main>
 
@@ -121,6 +120,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <ChatFlotante />
 
         <script is:inline>
+            // --- MANEJO DEL LOADER ---
             document.addEventListener('astro:before-preparation', (event) => {
                 const loader = document.getElementById('global-loader');
                 if (loader && event.to.pathname.includes('/blog')) {
@@ -136,18 +136,76 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                     loader.style.pointerEvents = 'none';
                 }
             });
+
+            // --- ANIMACIÓN GLOBAL ADAPTADA PARA CLIENT ROUTER ---
+            let scrollObserver;
+
+            function setupScrollReveals() {
+                // Desconectamos cualquier observador previo
+                if (scrollObserver) scrollObserver.disconnect();
+
+                // Damos un respiro de 50ms para que Astro pinte por completo el DOM de la nueva pestaña
+                setTimeout(() => {
+                    const elements = document.querySelectorAll('.reveal');
+                    if (elements.length === 0) return;
+                    
+                    scrollObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('reveal-active');
+                                scrollObserver.unobserve(entry.target); 
+                            }
+                        });
+                    }, {
+                        threshold: 0.05, 
+                        rootMargin: "0px 0px -20px 0px"
+                    });
+
+                    elements.forEach(el => scrollObserver.observe(el));
+                }, 50);
+            }
+
+            // Escuchamos los eventos clave de transición de Astro
+            document.addEventListener('astro:page-load', setupScrollReveals);
+            document.addEventListener('astro:after-swap', setupScrollReveals);
         </script>
 
         <style is:global>
-            @keyframes revealUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
+            /* Evitar desbordamientos fantasmas durante la transición de páginas */
+            .content-wrapper {
+                overflow: hidden;
             }
-            .reveal { animation: revealUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-            .delay-1 { animation-delay: 0.2s; opacity: 0; }
-            .delay-2 { animation-delay: 0.4s; opacity: 0; }
-            .delay-3 { animation-delay: 0.6s; opacity: 0; }
 
+            /* --- SISTEMA GLOBAL DE APARIENCIA EN SCROLL --- */
+            .reveal {
+                opacity: 0;
+                transform: scale(0.98); 
+                transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                            transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+                will-change: opacity, transform;
+            }
+
+            /* Se activa automáticamente al hacer scroll o cambiar de pestaña */
+            .reveal.reveal-active {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* Tiempos de retraso asignables mediante clases */
+            .reveal.delay-1 { transition-delay: 0.15s; }
+            .reveal.delay-2 { transition-delay: 0.3s; }
+            .reveal.delay-3 { transition-delay: 0.45s; }
+
+            /* Desactivar animaciones si el sistema operativo del usuario solicita reducción de movimiento */
+            @media (prefers-reduced-motion: reduce) {
+                .reveal {
+                    opacity: 1 !important;
+                    transform: none !important;
+                    transition: none !important;
+                }
+            }
+
+            /* --- ESTILOS COMPLEMENTARIOS --- */
             .whatsapp-wrapper {
                 position: fixed;
                 bottom: 0;

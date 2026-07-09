@@ -55,16 +55,35 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
 
                 <div class="relative flex justify-center py-12 lg:py-0" aria-hidden="true">
                     <div class="decorative-pillar"></div>
-                    <div class="relative w-full max-w-[500px] aspect-[4/5] z-10">
-                        <div class="img-box box-1">
-                            <img src="/images/nosotros-1.jpg" alt="Instalaciones de Diseñarte México" class="w-full h-full object-cover" loading="lazy" />
-                        </div>
-                        <div class="img-box box-2">
-                            <img src="/images/nosotros-2.jpg" alt="Procesos de impresión especializada" class="w-full h-full object-cover" loading="lazy" />
-                        </div>
-                        <div class="img-box box-3">
-                            <img src="/images/nosotros-3.jpg" alt="Soluciones visuales terminadas" class="w-full h-full object-cover" loading="lazy" />
-                        </div>
+                    <div class="relative w-full max-w-[400px] z-10">
+                        {/* 1. Imagen base (GRUPO) - Sin delay */}
+                        <img 
+                            src="/images/assets/GRUPO.webp" 
+                            alt="Instalaciones de Diseñarte México" 
+                            class="w-full aspect-[16/9] object-cover relative z-10 breath-animation" 
+                            loading="lazy"
+                            style="animation-delay: 0s;" 
+                        />
+                        
+                        {/* 2. Imagen superpuesta (PROIMP) - Delay de 1.3s */}
+                        <img 
+                            src="/images/assets/PROIMP.gif" 
+                            alt="Procesos de impresión especializada" 
+                            class="w-[85%] aspect-[16/9] object-cover absolute top-40 -right-30 z-20 breath-animation" 
+                            loading="lazy"
+                            style="animation-delay: 1.3s;" 
+                        />
+                        
+                        {/* 3. Imagen superpuesta (SOLUCIONES) - Delay de 2.6s */}
+                        <img 
+                            src="/images/assets/SOLUCIONES.webp" 
+                            alt="Soluciones visuales terminadas" 
+                            class="w-[85%] aspect-[16/9] object-cover absolute top-75 -left-6 z-30 breath-animation" 
+                            loading="lazy"
+                            style="animation-delay: 2.6s;" 
+                        />
+                        
+                        <div class="h-64"></div>
                     </div>
                 </div>
             </div>
@@ -72,7 +91,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
 
         <section class="w-full bg-gray-50/50 py-32 px-6 overflow-visible border-y border-gray-100" aria-labelledby="solutions-title">
             <div class="max-w-7xl mx-auto">
-                
                 <header class="mb-20 text-left max-w-4xl section-intro">
                     <h2 id="solutions-title" class="text-xl md:text-2xl font-avenir-book text-gray-900 leading-relaxed">
                         En <span class="font-avenir-black text-purple-accent">Diseñarte México</span>, ofrecemos soluciones integrales 
@@ -83,7 +101,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
                 </header>
 
                 <div class="flex flex-col lg:flex-row items-center justify-center lg:-space-x-12 space-y-24 lg:space-y-0 overflow-visible mb-24">
-                    
                     <article class="arrow-wrapper" style="z-index: 4;">
                         <div class="icon-orb"><img src="/images/assets/diseno.webp" alt="Icono Diseño Gráfico" loading="lazy" /></div>
                         <div class="arrow-body arrow-grad-1">
@@ -97,7 +114,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
                             </div>
                         </div>
                     </article>
-
                     <article class="arrow-wrapper" style="z-index: 3;">
                         <div class="icon-orb"><img src="/images/assets/impresion.webp" alt="Icono Impresión" loading="lazy" /></div>
                         <div class="arrow-body arrow-grad-2">
@@ -112,7 +128,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
                             </div>
                         </div>
                     </article>
-
                     <article class="arrow-wrapper" style="z-index: 2;">
                         <div class="icon-orb"><img src="/images/assets/market.webp" alt="Icono Marketing" loading="lazy" /></div>
                         <div class="arrow-body arrow-grad-3">
@@ -126,7 +141,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
                             </div>
                         </div>
                     </article>
-
                     <article class="arrow-wrapper" style="z-index: 1;">
                         <div class="icon-orb"><img src="/images/assets/comunicacion.webp" alt="Icono Comunicación" loading="lazy" /></div>
                         <div class="arrow-body arrow-grad-4">
@@ -141,7 +155,6 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
                             </div>
                         </div>
                     </article>
-
                 </div>
 
                 <div class="flex justify-center mt-20">
@@ -156,109 +169,80 @@ const seoDescription = "Más de 20 años optimizando la comunicación visual del
 </Layout>
 
 <style is:global>
-    /** 1. CONFIGURACIÓN DE TIPOGRAFÍA **/
-    @font-face {
-        font-family: 'Avenir Book';
-        src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype');
-        font-weight: normal; font-style: normal; font-display: swap;
-    }
-
+    @font-face { font-family: 'Avenir Book'; src: url('/fonts/avenir-lt-std-45-book.otf') format('opentype'); font-weight: normal; font-style: normal; font-display: swap; }
     .font-avenir-book { font-family: 'Avenir Book', sans-serif; }
     .font-avenir-black { font-family: 'Avenir LT Std 65 Medium', sans-serif; font-weight: 900; }
-
-    /** 2. VARIABLES Y COLORES DE MARCA **/
-    :root {
-        --purple-accent: #7C07A6;
-    }
+    :root { --purple-accent: #7C07A6; }
     .text-purple-accent { color: var(--purple-accent); }
-    .bg-purple-accent { background-color: var(--purple-accent); }
-
-    /** 3. ESTILOS DE LA SECCIÓN HERO **/
     .quote-mark { font-size: 7rem; font-weight: 900; color: #1a1a1a; line-height: 1; }
     .plus-symbol { font-size: 8rem; font-weight: 900; }
     .number-hero { font-size: 12rem; font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; }
     .unit-text { font-size: 6rem; font-weight: 900; margin-left: 0.1em; }
-    
-    .support-text { 
-        font-family: 'Avenir Book', sans-serif; 
-        font-size: 5.2rem; 
-        color: #1a1a1a; 
-        letter-spacing: -2px; 
-        line-height: 0.9;
-    }
+    .support-text { font-family: 'Avenir Book', sans-serif; font-size: 5.2rem; color: #1a1a1a; letter-spacing: -2px; line-height: 0.9; }
 
-    /** 4. COMPOSICIÓN DE IMÁGENES (GRID NOSOTROS) **/
-    .decorative-pillar {
-        position: absolute;
-        width: 60%;
-        z-index: 0;
-        border-radius: 0.125rem;
-        background-color: #7C07A6;
-        top: 0;
-        height: 100%;
-    }
-    @media (min-width: 768px) {
-        .decorative-pillar { width: 50%; }
-    }
-    @media (min-width: 1024px) {
-        .decorative-pillar { top: -25%; height: 135%; }
-    }
+    .decorative-pillar { position: absolute; width: 60%; z-index: 0; border-radius: 0.125rem; background-color: #7C07A6; top: 0; height: 100%; }
+    @media (min-width: 768px) { .decorative-pillar { width: 50%; } }
+    @media (min-width: 1024px) { .decorative-pillar { top: -25%; height: 135%; } }
 
-    .img-box {
-        position: absolute;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        border-color: white;
-        background-color: #e5e7eb;
-    }
-    .box-1 { top: 0; left: 0; width: 75%; height: 60%; border-width: 4px; }
-    .box-2 { top: 30%; right: 0; width: 65%; height: 45%; z-index: 20; border-width: 8px; }
-    .box-3 { bottom: 0; left: 5%; width: 55%; height: 40%; z-index: 30; border-width: 4px; }
-
-    /** 5. SISTEMA DE FLECHAS (SERVICIOS) **/
     .arrow-wrapper { position: relative; width: 100%; max-width: 380px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-    .arrow-body {
-        position: relative; width: 100%; min-height: 260px; display: flex; align-items: center;
-        padding: 2.5rem 2.5rem 2.5rem 3.5rem;
-        clip-path: polygon(0% 0%, 82% 0%, 98% 45%, 100% 50%, 98% 55%, 82% 100%, 0% 100%);
-    }
-
+    .arrow-body { position: relative; width: 100%; min-height: 260px; display: flex; align-items: center; padding: 2.5rem 2.5rem 2.5rem 3.5rem; clip-path: polygon(0% 0%, 82% 0%, 98% 45%, 100% 50%, 98% 55%, 82% 100%, 0% 100%); }
     .arrow-grad-1 { background: linear-gradient(135deg, #7C07A6 0%, #5e057e 100%); }
     .arrow-grad-2 { background: linear-gradient(135deg, #9816c7 0%, #7C07A6 100%); }
     .arrow-grad-3 { background: linear-gradient(135deg, #bc37ed 0%, #9816c7 100%); }
     .arrow-grad-4 { background: linear-gradient(135deg, #dc91f7 0%, #bc37ed 100%); }
-
-    .icon-orb {
-        position: absolute; top: -45px; left: 40px; width: 90px; height: 90px;
-        background: #7C07A6; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-        z-index: 50; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+    .icon-orb { position: absolute; top: -45px; left: 40px; width: 90px; height: 90px; background: #7C07A6; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 50; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .icon-orb img { width: 50%; height: 50%; object-fit: contain; }
     .content-box { color: white; text-align: left; }
     .content-box .title { font-size: 1.1rem; margin-bottom: 0.8rem; line-height: 1.2; color: #ffffff; }
     .content-box ul { font-size: 0.95rem; line-height: 1.5; color: #ffffff; }
-
-    /** 6. BOTÓN PERSONALIZADO (CTA) **/
-    .btn-custom-home {
-        display: inline-flex; align-items: center;
-        background-color: #f4f4f6; border-radius: 100px;
-        text-decoration: none; overflow: hidden;
-        transition: all 0.3s ease;
-    }
+    .btn-custom-home { display: inline-flex; align-items: center; background-color: #f4f4f6; border-radius: 100px; text-decoration: none; overflow: hidden; transition: all 0.3s ease; }
     .btn-custom-home:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
     .plus-side { background-color: #7C07A6; color: #ffffff; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; }
     .text-side { color: #1e293b; font-size: 0.9rem; padding: 0 40px 0 25px; letter-spacing: 1px; }
 
-    /** 7. RESPONSIVIDAD (MEDIA QUERIES) **/
     @media (max-width: 1024px) {
-        .number-hero { font-size: 7rem; }
-        .plus-symbol { font-size: 4rem; }
-        .unit-text { font-size: 3.5rem; }
-        .support-text { font-size: 3.5rem; letter-spacing: -1px; }
-        .quote-mark { font-size: 4rem; }
-        .arrow-body { clip-path: none; border-radius: 20px; padding-top: 4.5rem; min-height: auto; }
-        .icon-orb { left: 50%; transform: translateX(-50%); }
-        .section-intro { text-align: center; }
-        .line-decoration { margin-left: auto; margin-right: auto; }
+        .number-hero { font-size: 7rem; } .plus-symbol { font-size: 4rem; } .unit-text { font-size: 3.5rem; } .support-text { font-size: 3.5rem; letter-spacing: -1px; } .quote-mark { font-size: 4rem; }
+        .arrow-body { clip-path: none; border-radius: 20px; padding-top: 4.5rem; min-height: auto; } .icon-orb { left: 50%; transform: translateX(-50%); } .section-intro { text-align: center; } .line-decoration { margin-left: auto; margin-right: auto; }
+    }
+
+    /* Animación de respiración intensa y desincronizada */
+    .breath-animation {
+        animation: breath 4s ease-in-out infinite;
+        will-change: transform, opacity;
+    }
+
+    @keyframes breath {
+        0%, 100% {
+            transform: scale(1) translateY(0);
+            opacity: 0.95;
+        }
+        50% {
+            transform: scale(1.06) translateY(-12px);
+            opacity: 1;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .breath-animation { animation: none !important; }
     }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const breathingImages = document.querySelectorAll('.breath-animation');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    (entry.target as HTMLElement).style.animationPlayState = 'paused';
+                } else {
+                    (entry.target as HTMLElement).style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        breathingImages.forEach(img => {
+            observer.observe(img);
+        });
+    });
+</script>

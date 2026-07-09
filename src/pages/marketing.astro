@@ -8,24 +8,26 @@
 import Layout from "../layouts/Layout.astro";
 
 // --- CONFIGURACIÓN DE SEO ---
-const seoTitle = "Marketing Digital Estratégico | Diseñarte México";
+const seoTitle = "Innovación y marketing digital | Diseñarte México";
 const seoDescription = "Desarrollamos sistemas de adquisición de clientes y estrategias personalizadas para potenciar la visibilidad de tu marca en el sector industrial.";
 
 // --- ACTIVOS DIGITALES ---
 const images = {
   heroDetail: "/images/assets/marketing.webp",
   logoCohete: "/images/assets/ICON (1).webp",
-  collageBg: "/images/assets/IMGF (1).webp",
-  collagePic1: "/images/IMG_1.webp",
-  collagePic2: "/images/FOTO_3.webp",
+  collageBg: "/images/assets/gif2.gif",
+  collagePic1: "/images/assets/EDICION.webp",
+  collagePic2: "/images/assets/DESARROLLO WEB.webp",
 };
 
 const servicios = [
+  { texto: "Creación de paginas web" },
+  { texto: "Implementación de chatbot" },
+  { texto: "Producción de videos corporativos" },
+  { texto: "Optimización de redes sociales" },
   { texto: "Creación de contenido" },
-  { texto: "Sesión de fotos para contenido" },
-  { texto: "Campañas publicitarias" },
-  { texto: "Optimización de resultados" },
-  { texto: "Optimización Google maps" },
+  { texto: "Optimización google maps" },
+  { texto: "Y otros..." },
 ];
 ---
 
@@ -53,7 +55,7 @@ const servicios = [
                 class="h-16 md:h-20 w-auto animate-float-slow" 
               />
               <h1 id="marketing-heading" class="text-4xl md:text-6xl font-avenir-black uppercase tracking-tighter leading-none text-purple-accent">
-                Marketing <span class="text-black">Digital</span>
+                Innovación y  <span class="text-black">marketing digital</span>
               </h1>
             </header>
 
@@ -103,12 +105,12 @@ const servicios = [
             </div>
 
             <div class="pt-8 w-full select-none">
-              <h2 class="text-6xl md:text-[7.5rem] font-avenir-black tracking-tighter leading-[0.75] uppercase text-center lg:text-left">
-                <span class="block text-purple-accent">“Haz que</span>
+              <h2 class="text-6xl md:text-[5rem] font-avenir-black tracking-tighter leading-[0.75] uppercase text-center lg:text-left">
+                <span class="block text-purple-accent">"TRANSFORMA</span>
                 <span class="text-yellow-400 flex items-center justify-center lg:justify-start">
-                  <span class="text-7xl md:text-[9.5rem] mr-2">+</span>gente
+                  <span class="text-7xl md:text-[9.5rem] mr-2"></span>TU PRESENCIA
                 </span>
-                <span class="block text-purple-accent">te vea”</span>
+                <span class="block text-purple-accent">DIGITAL"</span>
               </h2>
             </div>
           </article>
@@ -116,15 +118,17 @@ const servicios = [
           <aside class="relative w-full flex items-stretch lg:justify-end min-h-[450px] lg:min-h-[700px]">
             <div class="relative w-full max-w-[500px] md:max-w-[600px] mb-20 lg:mb-0">
               
-              <div class="hidden lg:block absolute -left-10 top-0 w-[100%] h-full overflow-hidden z-0 bg-gray-100 shadow-sm rounded-lg">
-                <img src={images.collageBg} alt="Textura de fondo marketing" class="w-full h-full object-cover grayscale-[0.2]" loading="lazy" />
-              </div>
+     <div class="hidden lg:block absolute -right-60 top-0 w-[60%] h-full overflow-hidden z-0 bg-gray-100 shadow-sm rounded-lg relative">
+  <img src={images.collageBg} alt="Textura de fondo marketing" class="w-full h-full object-cover grayscale-[0.2]" loading="lazy" />
+  
+  <div class="absolute inset-0 bg-purple-accent opacity-60 mix-blend-multiply backdrop-blur-lg"></div>
+</div>
               
-              <div class="img-floating-card top-[5%] lg:top-[10%] right-0 w-[55%] rotate-[5deg] z-10 hover:rotate-0">
+              <div class="img-floating-card top-[5%] lg:top-[10%] right-80 w-[55%] rotate-[5deg] z-10 hover:rotate-0">
                 <img src={images.collagePic1} alt="Producción de contenido digital" class="w-full h-full object-cover" loading="lazy" />
               </div>
               
-              <div class="img-floating-card bottom-[5%] lg:bottom-[10%] left-[10%] lg:left-[20%] w-[75%] rotate-[-4deg] z-20 hover:rotate-0">
+              <div class="img-floating-card bottom-[5%] lg:bottom-[10%] left-[10%] lg:left-[0%] w-[75%] rotate-[-4deg] z-20 hover:rotate-0">
                 <img src={images.collagePic2} alt="Gestión de campañas publicitarias" class="w-full h-full object-cover" loading="lazy" />
               </div>
             </div>
@@ -188,24 +192,21 @@ const servicios = [
   .img-floating-card {
       position: absolute;
       aspect-ratio: 1 / 1;
-      background-color: #e5e7eb;
       overflow: hidden;
       transition: all 0.5s ease;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      border: 4px solid #ffffff;
   }
 
   /** 4. ANIMACIONES **/
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-15px) rotate(3deg); }
+    50% { transform: translateY(-5px) rotate(8deg); }
   }
   .animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
 
   /** 5. AJUSTES RESPONSIVOS ADICIONALES **/
   @media (max-width: 1024px) {
       .img-floating-card {
-          border-width: 2px;
+          border: none; /* Aseguro que no haya marco en móviles */
       }
   }
 </style>
